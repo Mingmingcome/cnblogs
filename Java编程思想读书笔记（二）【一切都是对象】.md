@@ -53,7 +53,7 @@
 linux中一个进程的虚拟内存分布:
 ![虚拟机内存分布](http://p2cc2nh3y.bkt.clouddn.com/chapter2-5-linux-memory.png)
 
-![虚拟内存分布](http://p2cc2nh3y.bkt.clouddn.com/heap-stack.jpg)
+![虚拟内存分布](http://p2cc2nh3y.bkt.clouddn.com/charpter2-1-heap-stack.jpg)
 
 图中0号地址在最下边，越往上内存地址越大。
 
