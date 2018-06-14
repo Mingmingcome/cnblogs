@@ -1,4 +1,4 @@
-<code>2018年1月9日17:06:47</code>
+<code>begin 2018年1月9日17:06:47</code>
 
 ## 第二章 一切都是对象
 
@@ -87,8 +87,8 @@ linux中一个进程的虚拟内存分布:
 |double  |64 bits|IEEE 754 |IEEE 754 |Double|
 |void    |-   |-     |-     |void   |
 
->所有数值类型都有<i>正负号</i>，所有不要去寻找无符号的数值类型。
->boolean类型所占存储空间的大小没有明确指定，仅定义为能够去字面值<i>true或false</i>。
+>所有数值类型都有<i>正负号</i>，所以不要去寻找无符号的数值类型。
+>boolean类型所占存储空间的大小没有明确指定，仅定义为能够取字面值<i>true或false</i>。
 >基本类型具有的包装类。
 
 Java SE5引入了自动装箱（autoboxing）和拆箱（unboxing）。
@@ -408,6 +408,15 @@ main()方法的参数是一个String对象的数组。Java编译器要求必须�
         public void f() {} 
     }
 ```
+
+命令行在源文件目录下键入`javadoc Documentation2.java`输出文档如下：
+
+![类注释](http://p2cc2nh3y.bkt.clouddn.com/chapter2-2-class-comment.png)
+
+![字段注释](http://p2cc2nh3y.bkt.clouddn.com/chapter2-3-field-comment.png)
+
+![方法注释](http://p2cc2nh3y.bkt.clouddn.com/chapter2-4-method-comment.png)
+
 ##### 2.8.4 一些标签示例
 
 略。
@@ -419,4 +428,17 @@ main()方法的参数是一个String对象的数组。Java编译器要求必须�
 #### 2.9 编码风格
 
 >在“Java编程语言编码约定”中，代码风格是这样规定的：
->
+>类名的首字母要大写，如果类名由几个单词构成，那么把它们并在一起（也就是说，不要用下划线来分隔名字），其中每个内部单词首字母都采用大写形式。
+
+**类名用“大驼峰”**
+
+**方法、字段、对象引用名称用“小驼峰”**
+
+相关规范可参考：
+[阿里巴巴Java开发手册](https://github.com/alibaba/p3c)
+
+#### 2.10 总结
+
+学习了如何编写一个简单程序的Java编程知识。
+
+<code>end 2018年1月16日09:19:10</code>
