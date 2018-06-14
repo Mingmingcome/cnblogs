@@ -51,6 +51,8 @@
 <strong>堆栈指针若向下移动，则分配新的内存；若向上移动，则释放那些内存。</strong>这句话之前一直都不理解，因为大学学习的数据结构中，栈底就是在底部，栈顶就是在顶部，所以堆栈指针向下移动的话，应该是释放内存的，所以这句话错了？当然不是！
 
 linux中一个进程的虚拟内存分布:
+![虚拟机内存分布](http://p2cc2nh3y.bkt.clouddn.com/chapter2-5-linux-memory.png)
+
 ![虚拟内存分布](http://p2cc2nh3y.bkt.clouddn.com/heap-stack.jpg)
 
 图中0号地址在最下边，越往上内存地址越大。
