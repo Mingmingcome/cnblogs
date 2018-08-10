@@ -9,7 +9,7 @@ package com.mingmingcome.designpattern.singleton;
 public class DoubleCheckLockingSingleton {
 	private static DoubleCheckLockingSingleton singleton;
 	private DoubleCheckLockingSingleton() {}
-	private static DoubleCheckLockingSingleton getInstance() {
+	public static DoubleCheckLockingSingleton getInstance() {
 		if (singleton == null) {
 			synchronized(DoubleCheckLockingSingleton.class) {
 				if (singleton == null) {
@@ -19,4 +19,5 @@ public class DoubleCheckLockingSingleton {
 		}
 		return singleton;
 	}
+	
 }

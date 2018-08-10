@@ -9,7 +9,7 @@ package com.mingmingcome.designpattern.singleton;
 public class LazyInitThreadUnsafeSingleton {
 	private static LazyInitThreadUnsafeSingleton singleton;
 	private LazyInitThreadUnsafeSingleton() {}	
-	private static LazyInitThreadUnsafeSingleton getInstance() {
+	public static LazyInitThreadUnsafeSingleton getInstance() {
 		if (singleton == null) {
 			singleton = new LazyInitThreadUnsafeSingleton();
 		}
