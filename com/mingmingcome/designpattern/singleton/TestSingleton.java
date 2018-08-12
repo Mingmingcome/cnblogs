@@ -11,7 +11,7 @@ import java.util.concurrent.Executors;
 
 /** 
  * @ClassName: TestSingleton
- * @Description: TODO
+ * @Description: 单例模式测试类
  * @author: luhaoming
  * @date: 2018年8月9日 上午8:16:36
  */
