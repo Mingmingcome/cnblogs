@@ -1,6 +1,8 @@
 package com.mingmingcome.designpattern.proxy.dynamicproxy;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Proxy;
 
 /** 
@@ -27,6 +29,29 @@ public class TestDynamicProxy {
 		
 		// 生产代理类
 		Subject proxy = (Subject)Proxy.newProxyInstance(loader, interfaces, handler);
+		
+		// 以下是Proxy.newProxyInstance分解步骤
+		/* 这太麻烦了。。。
+		// 1、
+		Class<?> c = Proxy.getProxyClass(loader, interfaces);
+		Constructor<?> ct = null;
+		Subject proxy = null;
+		try {
+			// 2、
+			ct = c.getConstructor(new Class[]{InvocationHandler.class});
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		}
+		try {
+			// 3、
+			proxy =(Subject) ct.newInstance(new Object[]{handler});
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		*/
 		
 		// 调用真实对象方法
 		proxy.request();

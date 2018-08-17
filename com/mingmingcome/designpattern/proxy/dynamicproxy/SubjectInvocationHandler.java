@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 
 /** 
  * @ClassName: Proxy
- * @Description: TODO
+ * @Description: InvocationHandler实现类：作为动态生成代理类的分发方法调用的调用处理器
  * @author: luhaoming
  * @date: 2018年8月12日 下午4:26:45
  */
