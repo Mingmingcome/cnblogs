@@ -51,9 +51,9 @@
 <strong>堆栈指针若向下移动，则分配新的内存；若向上移动，则释放那些内存。</strong>这句话之前一直都不理解，因为大学学习的数据结构中，栈底就是在底部，栈顶就是在顶部，所以堆栈指针向下移动的话，应该是释放内存的，所以这句话错了？当然不是！
 
 linux中一个进程的虚拟内存分布:
-![虚拟机内存分布](https://github.com/Mingmingcome/cnblogs/blob/master/images/chapter2-5-linux-memory.png?raw=true)
+![虚拟机内存分布](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/chapter2-5-linux-memory.png)
 
-![虚拟内存分布](https://github.com/Mingmingcome/cnblogs/blob/master/images/chapter2-1-heap-stack.jpg?raw=true)
+![虚拟内存分布](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/chapter2-1-heap-stack.jpg)
 
 图中0号地址在最下边，越往上内存地址越大。
 
@@ -411,11 +411,11 @@ main()方法的参数是一个String对象的数组。Java编译器要求必须�
 
 命令行在源文件目录下键入`javadoc Documentation2.java`输出文档如下：
 
-![类注释](https://github.com/Mingmingcome/cnblogs/blob/master/images/chapter2-2-class-comment.png?raw=true)
+![类注释](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/chapter2-2-class-comment.png)
 
-![字段注释](https://github.com/Mingmingcome/cnblogs/blob/master/images/chapter2-3-field-comment.png?raw=true)
+![字段注释](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/chapter2-3-field-comment.png)
 
-![方法注释](https://github.com/Mingmingcome/cnblogs/blob/master/images/chapter2-4-method-comment.png?raw=true)
+![方法注释](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/chapter2-4-method-comment.png)
 
 ##### 2.8.4 一些标签示例
 
