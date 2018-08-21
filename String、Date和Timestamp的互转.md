@@ -20,7 +20,7 @@ java8中java.time.format.DateTimeFormatter类中：
 public static DateTimeFormatter ofPattern(String pattern);
 ```
 
-java.time中几乎所有的类都有parse、format这两个方法。如DateTimeFormatter中：
+java.time中几乎所有的类都有parse、format这两个方法。如类LocalDataTime中：
 ``` java
 // String -> DateTime的天然转化器
 public static LocalDateTime parse(CharSequence text);
