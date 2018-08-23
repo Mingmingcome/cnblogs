@@ -14,12 +14,16 @@ public class SimpleFactory {
 //		switch(op){
 //		case "+":
 //			operation = new AddOperationImpl();
+//			break;
 //		case "-":
 //			operation = new SubOperationImpl();
+//			break;
 //		case "*":
 //			operation = new MulOperationImpl();
+//			break;
 //		case "/":
 //			operation = new DivOperationImpl();
+//			break;
 //		}
 		
 		// 2、所有对象
