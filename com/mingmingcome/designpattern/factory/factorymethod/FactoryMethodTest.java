@@ -1,7 +1,5 @@
 package com.mingmingcome.designpattern.factory.factorymethod;
 
-import com.sun.corba.se.spi.orb.Operation;
-
 /** 
  * @className: FactoryMethodTest
  * @Description: 工厂方法模式测试类（即客户端）
