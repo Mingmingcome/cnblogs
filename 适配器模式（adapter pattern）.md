@@ -1,5 +1,5 @@
 `2018年10月17日08:50:11`
 
-## 适配者模式（adapter pattern）
+## 适配器模式（adapter pattern）
 
 #### 定义
