@@ -181,6 +181,129 @@ java8之后：接口有了default方法，接口中的方法有了实现，因�
 
 ### 缺省适配器模式（default  adapter pattern）
 
-当不需要全部实现接口提供的方法时，可以设计一个适配器抽象类实现接口，并为接口中的每个方法提供默认方法，抽象类的子类就可以有选择的覆盖父类的某些方法实现需求，它适用于一个接口不想使用所有的方法的情况。
+当不需要全部实现接口提供的方法时，可以设计一个适配器抽象类实现接口，并为接口中的每个方法提供默认方法，抽象类的子类就可以有选择的覆盖父类的某些方法实现需求，它适用于一个接口不想使用所有的方法的情况。在java8后，接口中可以有default方法，就不需要这种缺省适配器模式了。接口中方法都设置为default，实现为空，这样同样同样可以达到缺省适配器模式同样的效果。
 
-#### 
+#### 图示
+
+缺省适配器模式结构图：
+![缺省适配器模式结构图](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/adapter-default-adapter.jpg)
+
+适配器Adapter类实现Target接口，方法默认为空。
+
+#### 代码示例
+
+目标角色（SampleOperation.java）：
+``` java
+public interface SampleOperation {
+	public abstract void operation1();
+	public abstract void operation2();
+	public abstract void operation3();
+	public abstract void operation4();
+	public abstract void operation5();
+}
+
+```
+包含了很多操作。
+
+适配器角色（DefaultAdapter.java）：
+``` java
+public abstract class DefaultAdapter implements SampleOperation{
+
+	@Override
+	public void operation1() {
+	}
+
+	@Override
+	public void operation2() {
+	}
+
+	@Override
+	public void operation3() {
+	}
+
+	@Override
+	public void operation4() {
+	}
+
+	@Override
+	public void operation5() {
+	}
+}
+```
+默认实现了所有操作
+
+这个是测试缺省适配器模式需要用到的类（Operator.java）：
+``` java
+public class Operator {
+	private SampleOperation sampleOperation;
+	
+	public void addOperation(SampleOperation sampleOperation) {
+		this.sampleOperation = sampleOperation;
+	}
+
+	public void operation1() {
+		sampleOperation.operation1();
+	}
+
+	public void operation2() {
+		sampleOperation.operation2();
+	}
+
+	public void operation3() {
+		sampleOperation.operation3();
+	}
+
+	public void operation4() {
+		sampleOperation.operation4();
+	}
+
+	public void operation5() {
+		sampleOperation.operation5();
+	}
+}
+```
+
+缺省适配器模式测试类（DefaultAdapterTest.java）：
+``` java
+public class DefaultAdapterTest {
+
+	public static void main(String[] args) {
+		
+		// 1、原来要实现所有操作类的操作
+		Operator operator1 = new Operator();
+		operator1.addOperation(new SampleOperation() {
+
+			@Override
+			public void operation1() {}
+
+			@Override
+			public void operation2() {
+				System.out.println("操作2");
+			}
+
+			@Override
+			public void operation3() {}
+
+			@Override
+			public void operation4() {}
+
+			@Override
+			public void operation5() {}
+			
+		});
+		operator1.operation2();
+		
+		// 2、使用缺省适配器只需要实现需要用到的接口方法
+		Operator operator2 = new Operator();
+		operator2.addOperation(new DefaultAdapter() {
+			
+			@Override
+			public void operation2() {
+				System.out.println("操作2");
+			}
+		});
+		operator2.operation2();
+	}
+}
+```
+测试类需要执行操作2，operator1添加SampleOperation时要实现接口里所有方法，operator2添加SampleOperation时只需要通过DefaultAdapter适配器添加自己需要的操作即可。毫无疑问，测试结果是一样的。
