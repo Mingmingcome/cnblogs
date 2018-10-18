@@ -307,3 +307,10 @@ public class DefaultAdapterTest {
 }
 ```
 测试类需要执行操作2，operator1添加SampleOperation时要实现接口里所有方法，operator2添加SampleOperation时只需要通过DefaultAdapter适配器添加自己需要的操作即可。毫无疑问，测试结果是一样的。
+![]()
+
+#### 优点
+
+#### 缺点
+
+#### 总结
