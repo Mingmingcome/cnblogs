@@ -47,6 +47,11 @@
 
 如上图，因为java没有类多继承，所以只能实现Target接口，而且Target只能是接口。Adapter实现了Target接口，继承了Adaptee类，Target.operation()实现为Adaptee.specificOperation()。
 
+客户端调用类适配器：
+![客户端调用类适配器](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/adapter-class-adapter.png)
+
+这个图是Adapter适配器多继承的情况，引用维基百科，可以看到客户端调用适配器Adapter的methodA时候，实际上调用的是Adapter继承过来的method1到methodN。
+
 #### 代码示例
 
 一张图说明需求：
@@ -127,6 +132,11 @@ public class ClassAdapterPatternTest {
 ![对象适配器模式结构图](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/adapter-object-adapter.jpg)
 
 如上图，与类适配器模式不同的是，Adapter只实现了Target的接口，没有继承Adaptee，而是使用组合的方式引用adaptee。
+
+客户端调用对象适配器：
+![客户端调用对象适配器](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/adapter-object-adapter.png)
+
+客户端调用对象适配器方法methodA的时候，实际上调用的是创建对象传进来的适配者实例的方法methodB。
 
 #### 代码示例
 
@@ -307,10 +317,32 @@ public class DefaultAdapterTest {
 }
 ```
 测试类需要执行操作2，operator1添加SampleOperation时要实现接口里所有方法，operator2添加SampleOperation时只需要通过DefaultAdapter适配器添加自己需要的操作即可。毫无疑问，测试结果是一样的。
-![]()
+![缺省适配器模式测试结果](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/adapter-default-adapter-result.jpg)
 
 #### 优点
 
+1、复用性：系统需要使用已经存在的类，功能符合系统要求，但这个类的接口不符合系统的需求，通过适配器模式解决不兼容的问题，使这些功能类得到复用。
+
+2、扩展性：适配器使得系统多了一个方式扩展系统的功能
+
+3、耦合性：一定程度上的解耦
+
 #### 缺点
 
+过多地使用适配器，增加系统理解难度。
+
 #### 总结
+
+本文主要介绍了三种适配器模式，本质上是现有的不兼容的接口转换为需要的接口。
+
+类适配器模式，以继承现有类的方式转换。
+
+对象适配器模式，以组合对象实例的方式转换。
+
+接口适配器模式，以实现接口的方式转换。
+
+适配器模式是在现有的类和系统都不易修改的情况下使用，在系统设计之初慎用适配器模式。
+
+#### 完
+
+`2018年10月18日14:53:33`
