@@ -16,9 +16,171 @@
 
 #### 使用场景
 
-客户端需要一个target（目标）接口，但是不能直接使用adaptee（适配者）类，因为它的接口和target接口不一致，所以需要adapter（适配器）将adaptee转换为target接口。
+客户端需要一个target（目标）接口，但是不能直接重用已经存在的adaptee（适配者）类，因为它的接口和target接口不一致，所以需要adapter（适配器）将adaptee转换为target接口。前提是target接口和已存在的适配者adaptee类所做的事情是相同或相似，只是接口不同且都不易修改。如果在设计之初，最好不要考虑这种设计模式。凡事都有例外，就是设计新系统的时候考虑使用第三方组件，因为我们就没必要为了迎合它修改自己的设计风格，可以尝试使用适配器模式。
 
 #### 角色
 
+目标角色（target）：这是客户锁期待的接口。目标可以是具体的或抽象的类，也可以是接口
 
+适配者角色（adaptee）：已有接口，但是和客户器期待的接口不兼容。
 
+适配器角色（adapter）：将已有接口转换成目标接口。
+
+#### 分类
+
+适配器模式有分三类：
+
+- 1、类适配器模式（class adapter pattern）
+
+- 2、对象适配器模式（object adapter pattern）
+
+- 3、缺省适配器模式（default adapter pattern），也叫默认适配器模式、接口适配器模式
+
+### 类适配器模式（class  adapter pattern）
+
+类适配器模式在编译时实现target（目标）接口。这种适配器模式使用了多个实现了期待的接口或者已经存在的接口的多态接口。比较典型的就是：target接口被创建为一个纯粹的接口，如Java不支持多继承的语言。
+
+#### 图示
+
+类适配器模式（adapter pattern）结构图：
+![类适配器模式](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/adapter-class-adapter.jpg)
+
+如上图，因为java没有类多继承，所以只能实现Target接口，而且Target只能是接口。Adapter实现了Target接口，继承了Adaptee类，Target.operation()实现为Adaptee.specificOperation()。
+
+#### 代码示例
+
+一张图说明需求：
+
+![电源适配器](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/adapter-power-adapter.jpg)
+
+嗯，就是电源适配器了。上面有这样两行：
+> 输入：100-240V ~ 0.5A 50-60HZ
+ 
+> 输出：5.2V ==== 2.4A
+
+我们的需求就是将电源输入220V（适配者）转换为5V输出（目标）。
+
+目标角色（PowerTarget.java）：
+``` java
+public interface PowerTarget {
+	public int output5V();
+}
+```
+电源目标。
+
+适配者角色（PowerAdaptee.java）：
+``` java
+public class PowerAdaptee {
+	private int output =  220;
+	public int output220V() {
+		System.out.println("电源输出电压：" + output);
+		return output;
+	}
+}
+```
+电源适配者。
+
+适配器角色（PowerAdapter.java）：
+``` java
+public class PowerAdapter extends PowerAdaptee implements PowerTarget{
+	
+	@Override
+	public int output5V() {
+		int output = output220V();
+		System.out.println("电源适配器开始工作，此时输出电压是：" + output);
+		output = output/44;
+		System.out.println("电源适配器工作完成，此时输出电压是：" + output);
+		return output;
+	}
+	
+}
+```
+电源适配器类实现了电源目标，继承了适配者。其实如果没有我打印的那些提示或者说日志，output5V方法可以直接写成：
+``` java
+public int output5V() {
+		return output220V()/44;
+	}
+```
+这样就适配了。
+
+类适配器模式测试类（ClassAdapterPatternTest.java）：
+``` java
+public class ClassAdapterPatternTest {
+	
+	public static void main(String[] args) {
+		PowerTarget target = new PowerAdapter();
+		target.output5V();
+	}
+}
+```
+
+测试结果：
+![适配器模式示例测试结果](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/adapter-instance-result.jpg)
+
+### 对象适配器模式（object  adapter pattern）
+
+对象适配器模式在运行时实现target（目标）接口。在这种适配器模式中，适配器包装了一个类实例。在这种情况下，适配器调用包装对象实例的方法。
+
+#### 图示
+
+对象适配器模式（object adapter pattern）结构图：
+![对象适配器模式结构图](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/adapter-object-adapter.jpg)
+
+如上图，与类适配器模式不同的是，Adapter只实现了Target的接口，没有继承Adaptee，而是使用组合的方式引用adaptee。
+
+#### 代码示例
+
+代码示例和类适配器模式只有Adapter类有不同，其他完成一样，连测试结果都是一样。下面只贴上Adapter类。
+
+适配器角色（Adapter.java）：
+``` java
+public class PowerAdapter implements PowerTarget{
+	private PowerAdaptee powerAdaptee;
+
+	public PowerAdapter(PowerAdaptee powerAdaptee) {
+		super();
+		this.powerAdaptee = powerAdaptee;
+	}
+
+	@Override
+	public int output5V() {
+		int output = powerAdaptee.output220V();
+		System.out.println("电源适配器开始工作，此时输出电压是：" + output);
+		output = output/44;
+		System.out.println("电源适配器工作完成，此时输出电压是：" + output);
+		return output;
+	}
+	
+}
+```
+实现了PowerTarget（目标角色），在创建对象时引入PowerAdaptee（适配者角色）。
+
+#### 类适配器模式和对象适配器模式的对比
+
+##### 优点
+
+类适配器模式（class adapter pattern）：
+
+由于适配器adapter类是适配者adaptee类的子类，因此可以在适配器类中置换一些适配者的方法，即Override（重写），使得适配器的灵活性更强。
+
+对象适配器模式（object adapter pattern）：
+
+一个对象适配器可以把多个不同的适配者adaptee适配到一个目标，也就是说，同一个适配器可以将适配者类和它的子类都适配到目标接口。
+
+##### 缺点
+
+类适配器模式：
+
+java8之前：接口没有default方法，就是没有实现了具体逻辑的方法，而且不支持类多继承，所以<b>适配者类只能有一个</b>。
+
+java8之后：接口有了default方法，接口中的方法有了实现，因为接口是多继承的，所以适配者可以是多个带有default方法的接口，但是接口是不可以实例化的，实际上没有什么意义。有个解决方法就是，接口里都是default方法，实现接口的类什么也没做，就是提供一个可以实例化的类。这样的化，类适配器模式中适配者adapter类就可以适配多个适配者adaptee类了。这个解决方法只是我理论上论证一下，实际上可行与否，请自行判断验证。
+
+对象适配器模式：
+
+类适配器模式的优点就是对象适配器模式的缺点，不能置换适配者类的方法。如果想修改适配者类的一个或多个方法，就只好先创建一个继承与适配者类的子类，把适配者类的方法置换掉，然后把适配者的子类当做真正的适配者进行适配，实现过程较为复杂。
+
+### 缺省适配器模式（default  adapter pattern）
+
+当不需要全部实现接口提供的方法时，可以设计一个适配器抽象类实现接口，并为接口中的每个方法提供默认方法，抽象类的子类就可以有选择的覆盖父类的某些方法实现需求，它适用于一个接口不想使用所有的方法的情况。
+
+#### 
