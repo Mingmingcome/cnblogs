@@ -18,6 +18,10 @@
 
 客户端需要一个target（目标）接口，但是不能直接重用已经存在的adaptee（适配者）类，因为它的接口和target接口不一致，所以需要adapter（适配器）将adaptee转换为target接口。前提是target接口和已存在的适配者adaptee类所做的事情是相同或相似，只是接口不同且都不易修改。如果在设计之初，最好不要考虑这种设计模式。凡事都有例外，就是设计新系统的时候考虑使用第三方组件，因为我们就没必要为了迎合它修改自己的设计风格，可以尝试使用适配器模式。
 
+这是一个适配器使用场景的例子：
+
+Sun公司在1996年公开了Java语言的数据库连接工具JDBC，JDBC使得Java语言程序能够与数据库连接，并使用SQL语言来查询和操作数据。JDBC给出一个客户端通用的抽象接口，每一个具体数据库引擎（如SQL Server、Oracle、MySQL等）的JDBC驱动软件都是一个介于JDBC接口和数据库引擎接口之间的适配器软件。抽象的JDBC接口和各个数据库引擎API之间都需要相应的适配器软件，这就是为各个不同数据库引擎准备的驱动程序。
+
 #### 角色
 
 目标角色（target）：这是客户锁期待的接口。目标可以是具体的或抽象的类，也可以是接口
@@ -131,7 +135,7 @@ public class ClassAdapterPatternTest {
 对象适配器模式（object adapter pattern）结构图：
 ![对象适配器模式结构图](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/adapter-object-adapter.jpg)
 
-如上图，与类适配器模式不同的是，Adapter只实现了Target的接口，没有继承Adaptee，而是使用组合的方式引用adaptee。
+如上图，与类适配器模式不同的是，Adapter只实现了Target的接口，没有继承Adaptee，而是使用聚合的方式引用adaptee。
 
 客户端调用对象适配器：
 ![客户端调用对象适配器](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/adapter-object-adapter.png)
@@ -337,7 +341,7 @@ public class DefaultAdapterTest {
 
 类适配器模式，以继承现有类的方式转换。
 
-对象适配器模式，以组合对象实例的方式转换。
+对象适配器模式，以聚合对象实例的方式转换。
 
 接口适配器模式，以实现接口的方式转换。
 
