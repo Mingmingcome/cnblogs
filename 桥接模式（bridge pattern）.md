@@ -72,11 +72,106 @@ public class Money{}
 
 #### 图示
 
-
+![桥接模式结构图](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/bridge-pattern-structure.jpg)
 
 #### 代码示例
 
 故事背景：城市A和城市B是分隔两岸的两座城市，他们通过一座拥有悠久历史的桥连接起来。城市A人文气息浓厚，商店林立，人来人往，熙熙攘攘。城市B工业气息浓厚，各种机器和手工作坊相辉映，在重复的工序中输出产品。城市A和城市B交互的模式，一般是城市A下订单，城市B完成订单。
+
+抽象化角色（）：
+``` java
+public abstract class OrderAbstraction {
+	protected FactoryImplementor factoryImplementor;
+	
+	public OrderAbstraction(FactoryImplementor factoryImplementor) {
+		this.factoryImplementor = factoryImplementor;
+	}
+	
+	public abstract void provide();
+}
+```
+
+``` java
+public class CakeOrderRefinedAbstraction extends OrderAbstraction {
+	private int count;
+	private String orderName = "蛋糕";
+
+	public CakeOrderRefinedAbstraction(int count, FactoryImplementor factoryImplementor) {
+		super(factoryImplementor);
+		this.count = count;
+	}
+
+	@Override
+	public void provide() {
+		factoryImplementor.provide(count, orderName);
+	}
+
+}
+```
+
+``` java
+public interface FactoryImplementor {
+	public void provide(int count, String orderName);
+}
+```
+
+``` java
+public class HandworkFactoryConcreteImplementor implements FactoryImplementor {
+
+	public void provide(int count, String orderName) {
+		float time = (float)(count * 1);
+		System.out.println("手工使用了" + time + "小时，完成了" + count + "份" + orderName);
+	}
+
+}
+```
+
+``` java
+public class MachineFactoryConcreteImplementor implements FactoryImplementor {
+
+	public void provide(int count, String orderName) {
+		float time = (float)(count * 0.5);
+		System.out.println("机器使用了" + time + "小时，完成了" + count + "份" + orderName);
+	}
+
+}
+```
+
+``` java
+public class BridgePatternTest {
+
+	public static void main(String[] args) {
+		
+		OrderAbstraction handworkCake = 
+				new CakeOrderRefinedAbstraction(10, 
+						new HandworkFactoryConcreteImplementor());
+		OrderAbstraction machineCake = 
+				new CakeOrderRefinedAbstraction(10, 
+						new MachineFactoryConcreteImplementor());
+		
+		handworkCake.provide();
+		machineCake.provide();
+	}
+
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 现在就是我写的代码示例是一个对象适配器模式，按道理来说，也是一个桥接模式，我也按照桥接模式的UML图实现了。但是这两者的关系在与设计的意图，桥接模式是在设计之初，认为抽象和现实都存在多维的变化，而且抽象和实现的变化是不相关的，在可预见的情况下做出的选择，适配器模式是系统已经成熟到无法修改或者修改的工作量无法估量的时候，但是又想复用当前的功能的时候使用。其实示例代码有点往桥接模式字面上靠的意思，美名曰形象生动。看来还是要写一个表达出桥接模式真正思想的示例才行。
