@@ -74,12 +74,15 @@ public class Money{}
 
 ![桥接模式结构图](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/bridge-pattern-structure.jpg)
 
-#### 代码示例
+抽象（Abstraction）和实现（Implementor）以组合的方式关联起来，抽象的动作行为是由实现来执行。抽象和实现都可以有它们各自的变化，被多个子类继承，拥有不同的功能。
+
+#### 代码示例1
 
 故事背景：城市A和城市B是分隔两岸的两座城市，他们通过一座拥有悠久历史的桥连接起来。城市A人文气息浓厚，商店林立，人来人往，熙熙攘攘。城市B工业气息浓厚，各种机器和手工作坊相辉映，在重复的工序中输出产品。城市A和城市B交互的模式，一般是城市A下订单，城市B完成订单。
 
-抽象化角色（）：
+抽象化角色（OrderAbstraction.java）：
 ``` java
+// 订单
 public abstract class OrderAbstraction {
 	protected FactoryImplementor factoryImplementor;
 	
@@ -91,7 +94,9 @@ public abstract class OrderAbstraction {
 }
 ```
 
+扩充抽象化角色（CakeOrderRefinedAbstraction.java）：
 ``` java
+// 蛋糕订单
 public class CakeOrderRefinedAbstraction extends OrderAbstraction {
 	private int count;
 	private String orderName = "蛋糕";
@@ -109,13 +114,17 @@ public class CakeOrderRefinedAbstraction extends OrderAbstraction {
 }
 ```
 
+实现化角色（FactoryImplementor.java）：
 ``` java
+// 工厂
 public interface FactoryImplementor {
 	public void provide(int count, String orderName);
 }
 ```
 
+具体实现化角色1（HandworkFactoryConcreteImplementor.java）：
 ``` java
+// 手工作坊
 public class HandworkFactoryConcreteImplementor implements FactoryImplementor {
 
 	public void provide(int count, String orderName) {
@@ -126,7 +135,9 @@ public class HandworkFactoryConcreteImplementor implements FactoryImplementor {
 }
 ```
 
+具体实现化角色2（MachineFactoryConcreteImplementor.java）：
 ``` java
+// 工厂机器
 public class MachineFactoryConcreteImplementor implements FactoryImplementor {
 
 	public void provide(int count, String orderName) {
@@ -137,6 +148,7 @@ public class MachineFactoryConcreteImplementor implements FactoryImplementor {
 }
 ```
 
+测试类（BridgePatternTest.java）：
 ``` java
 public class BridgePatternTest {
 
@@ -156,6 +168,8 @@ public class BridgePatternTest {
 }
 ```
 
+测试结果：
+![桥接模式测试结果](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/bridge-pattern-result.png)
 
 
 
