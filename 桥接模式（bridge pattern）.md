@@ -76,7 +76,7 @@ public class Money{}
 
 抽象（Abstraction）和实现（Implementor）以组合的方式关联起来，抽象的动作行为是由实现来执行。抽象和实现都可以有它们各自的变化，被多个子类继承，拥有不同的功能。
 
-#### 代码示例1
+#### 代码示例
 
 故事背景：城市A和城市B是分隔两岸的两座城市，他们通过一座拥有悠久历史的桥连接起来。城市A人文气息浓厚，商店林立，人来人往，熙熙攘攘。城市B工业气息浓厚，各种机器和手工作坊相辉映，在重复的工序中输出产品。城市A和城市B交互的模式，一般是城市A下订单，城市B完成订单。
 
@@ -112,6 +112,22 @@ public class CakeOrderRefinedAbstraction extends OrderAbstraction {
 	}
 
 }
+// 糖果订单
+public class CandyOrderRefinedAbstraction extends OrderAbstraction {
+	private int count;
+	private String orderName = "糖果";
+
+	public CandyOrderRefinedAbstraction(int count, FactoryImplementor factoryImplementor) {
+		super(factoryImplementor);
+		this.count = count;
+	}
+
+	@Override
+	public void provide() {
+		factoryImplementor.provide(count, orderName);
+	}
+
+}
 ```
 
 实现化角色（FactoryImplementor.java）：
@@ -122,7 +138,7 @@ public interface FactoryImplementor {
 }
 ```
 
-具体实现化角色1（HandworkFactoryConcreteImplementor.java）：
+具体实现化角色（HandworkFactoryConcreteImplementor.java、MachineFactoryConcreteImplementor.java）：
 ``` java
 // 手工作坊
 public class HandworkFactoryConcreteImplementor implements FactoryImplementor {
@@ -133,10 +149,6 @@ public class HandworkFactoryConcreteImplementor implements FactoryImplementor {
 	}
 
 }
-```
-
-具体实现化角色2（MachineFactoryConcreteImplementor.java）：
-``` java
 // 工厂机器
 public class MachineFactoryConcreteImplementor implements FactoryImplementor {
 
@@ -153,50 +165,59 @@ public class MachineFactoryConcreteImplementor implements FactoryImplementor {
 public class BridgePatternTest {
 
 	public static void main(String[] args) {
-		
+		// 手工蛋糕订单
 		OrderAbstraction handworkCake = 
 				new CakeOrderRefinedAbstraction(10, 
 						new HandworkFactoryConcreteImplementor());
+		// 机器蛋糕订单
 		OrderAbstraction machineCake = 
 				new CakeOrderRefinedAbstraction(10, 
 						new MachineFactoryConcreteImplementor());
-		
+		// 手工糖果订单
+		OrderAbstraction handworkCandy = 
+				new CandyOrderRefinedAbstraction(10, 
+						new HandworkFactoryConcreteImplementor());
+		// 机器糖果订单
+		OrderAbstraction machineCandy = 
+				new CandyOrderRefinedAbstraction(10, 
+						new MachineFactoryConcreteImplementor());
+
 		handworkCake.provide();
 		machineCake.provide();
+		handworkCandy.provide();
+		machineCandy.provide();
 	}
-
 }
 ```
 
 测试结果：
 ![桥接模式测试结果](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/bridge-pattern-result.png)
 
+结果表明了：抽象和实现分离，各自变化。订单存在着两个维度变化，一个是种类，一个是制造方式，种类分为蛋糕和糖果，制造方式有手工和机器。
+#### 其他实例
 
+手机软件也有种类和运行在不同的操作系统上两个维度的变化，种类有通讯录、短信等，操作系统IOS，Android等，这样就适用于桥接模式。
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-现在就是我写的代码示例是一个对象适配器模式，按道理来说，也是一个桥接模式，我也按照桥接模式的UML图实现了。但是这两者的关系在与设计的意图，桥接模式是在设计之初，认为抽象和现实都存在多维的变化，而且抽象和实现的变化是不相关的，在可预见的情况下做出的选择，适配器模式是系统已经成熟到无法修改或者修改的工作量无法估量的时候，但是又想复用当前的功能的时候使用。其实示例代码有点往桥接模式字面上靠的意思，美名曰形象生动。看来还是要写一个表达出桥接模式真正思想的示例才行。
+如果需要开发一个跨平台视频播放器，可以在不同操作系统平台（如Windows、Linux、Unix等）上播放多种格式的视频文件，常见的视频格式包括MPEG、RMVB、AVI、WMV等。同样适用于桥接模式。
 
 #### 与适配器模式的区别
 
+桥接模式是在设计之初，认为抽象和现实都存在多维的变化，而且抽象和实现的变化是不相关的，在可预见的情况下做出的选择，适配器模式是系统已经成熟到无法修改或者修改的工作量无法估量的时候，但是又想复用当前的功能的时候使用，或者使用第三方组件的时候使用。很多情况下，桥接模式就是使用了对象适配器模式实现的。适配器模式可以参考本人[适配者模式](https://www.cnblogs.com/mingmingcome/p/9810731.html)。
+
 #### 优点
+
+- 1、抽象和实现分离
+
+- 2、多维度变化
 
 #### 缺点
 
+- 1、增加系统的设计和理解难度
+
 #### 总结
+
+当在系统设计初期，发现抽象和实现存在各自的变化或某个类由两个不相关的维度描述时，可以考虑桥接模式。
 
 #### 完
 
+`2018年11月16日21:56:11`
