@@ -71,4 +71,13 @@ at java.lang.Thread.run(Thread.java:662)
 ![ScheduledExecutorService](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/ScheduledExecutorService-execute-thread.png)
 
 我Google了一下，发现其实有很多前辈都曾遇到过这个问题。
-![Google搜索记录](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/ScheduledExecutorService-Google-search.png)
+
+![Google搜索](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/ScheduledExecutorService-Google-search.png)
+
+在这些文章中，我找到了我要的答案。我引用其中的一篇文章[从一个java线程挂掉的例子讨论分析定位问题基本原则](http://mingxinglai.com/cn/2016/05/java-thread-crash/)文字作为答案吧。
+
+>那么，Java线程挂掉的主要原因是：Any thrown exception or error reaching the executor causes the executor(ScheduledExecutorService) to halt. No more invocations on the Runnable, no more work done. This work stoppage happens silently, you’ll not be informed.
+
+>也就是说，如果使用者抛出异常，ScheduledExecutorService 将会停止线程的运行，而且不会报错，没有任何提示信息。
+
+#### 
