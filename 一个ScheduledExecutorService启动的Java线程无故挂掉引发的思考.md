@@ -17,4 +17,53 @@
 >真我：当然有了，你这个菜鸟，你不知道的地方多着呢。
 
 于是，去找老大问一下问题怎么解决，老大说去生产数据库上导十万数据到测试库，然后在本地debug一下。接着，我就从数据库里面导出一万数据开始测试，在eclipse启动进程，日志写在本地文件。很快，问题再一次出现。然后断点，然后找到出问题的地方。出问题的地方如下：
-!(问题地点)[]
+
+![问题地点](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/ScheduledExecutorService-throw-Exception.png)
+
+代码就一行：
+
+``` java
+String timeStamp = DateUtil.str2Date(receiveTime, DateUtil.YYYYMMDDHH24MISS).getTime() + "000";
+```
+
+这行代码的意思是，将字符串的接收时间receiveTime格式化，getTime()得到时间戳，因为格式是要微秒，加了三个零。
+
+DateUtil.str2Date方法：（String时间转化为Date类型，关于时间转换可以看看本人的[String、Date和Timestamp的互转](https://www.cnblogs.com/mingmingcome/p/9514601.html)）
+
+``` java
+public static Date str2Date(String dateStr, String dateFormat){
+	if (StringHelper.isEmpty(dateStr)) {
+		return null;
+	}
+
+	SimpleDateFormat df = new SimpleDateFormat(dateFormat);
+	try {
+		return df.parse(dateStr);
+	} catch (Exception ex) {
+		return null;
+	}
+}
+```
+
+这个工具类当parse方法抛出异常的时候返回null，看起来是没有问题的，但是我在转换之后没有判断是否为空即`null`，然后就变成了`null.getTime()`，接着就抛了一个很常见的`NullPointerException`异常。
+
+到这里，看似问题已经解决了，但是问题并没有那么简单。
+
+#### 寻根问底
+
+上面说到的在线程中抛出了`NullPointerException`异常，解决方法是增加一个判断是否为空的条件就可以了。但是一般来说，有异常的时候，日志里或者debug时控制台会打印异常信息，类似这种：
+
+``` java
+at com.netease.backend.rds.task.CleanHandleThread.run(CleanHandleThread.java:65)
+at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:439)
+at java.util.concurrent.FutureTask$Sync.innerRunAndReset(FutureTask.java:317)
+at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:150)
+at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$101(ScheduledThreadPoolExecutor.java:98)
+at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.runPeriodic(ScheduledThreadPoolExecutor.java:180)
+at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:204)
+at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:895)
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:918)
+at java.lang.Thread.run(Thread.java:662)
+```
+
+但实际上我debug的时候，并没有看到打印的异常信息。我是断点到这一步，发现下一行代码没有执行，我就断定问题是在这里，而且空指针异常一下子就能看出来了。问题来了，为什么没有打印异常信息呢？我Google了一下，发现其实有很多前辈都曾遇到过这个问题。我想应该是线程的问题
