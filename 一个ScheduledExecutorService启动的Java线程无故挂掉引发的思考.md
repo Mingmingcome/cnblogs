@@ -66,4 +66,9 @@ at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:91
 at java.lang.Thread.run(Thread.java:662)
 ```
 
-但实际上我debug的时候，并没有看到打印的异常信息。我是断点到这一步，发现下一行代码没有执行，我就断定问题是在这里，而且空指针异常一下子就能看出来了。问题来了，为什么没有打印异常信息呢？我Google了一下，发现其实有很多前辈都曾遇到过这个问题。我想应该是线程的问题
+但实际上我debug的时候，并没有看到打印的异常信息。我是断点到这一步，发现下一行代码没有执行，我就断定问题是在这里，而且空指针异常一下子就能看出来了。问题来了，为什么没有打印异常信息呢？我想应该是线程的问题，代码里启动这个写日志的定时任务用的是ScheduledExecutorService：
+
+![ScheduledExecutorService](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/ScheduledExecutorService-execute-thread.png)
+
+我Google了一下，发现其实有很多前辈都曾遇到过这个问题。
+![Google搜索记录](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/ScheduledExecutorService-Google-search.png)
