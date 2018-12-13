@@ -51,7 +51,7 @@ public static Date str2Date(String dateStr, String dateFormat){
 
 #### 寻根问底
 
-上面说到的在线程中抛出了`NullPointerException`异常，解决方法是增加一个判断是否为空的条件就可以了。但是一般来说，有异常的时候，日志里或者debug时控制台会打印异常信息，类似这种：
+上面说到的在线程中抛出了`NullPointerException`异常，解决方法是增加一个判断是否为空的条件就可以了。但是一般来说，有异常的时候，程序没有捕获异常，日志里或者debug时控制台会打印异常信息，类似这种：
 
 ``` java
 at com.netease.backend.rds.task.CleanHandleThread.run(CleanHandleThread.java:65)
@@ -80,4 +80,131 @@ at java.lang.Thread.run(Thread.java:662)
 
 >也就是说，如果使用者抛出异常，ScheduledExecutorService 将会停止线程的运行，而且不会报错，没有任何提示信息。
 
-#### 
+这就是在日志中和控制台都没有看到打印异常信息的原因。
+
+#### 解决方法
+
+写了一个测试类，有兴趣可以研究一下这个bug。
+``` java
+public class ScheduledExecutorServiceThrowExceptionTest {
+	
+	private static int i = 0;
+	
+	public static void main(String[] args) {
+		ScheduledExecutorService exc = Executors.newSingleThreadScheduledExecutor();
+		exc.scheduleAtFixedRate(new Runnable(){
+
+			@Override
+			public void run() {
+				i++;
+				if (i==6) {
+					throw new RuntimeException();
+				} else {
+					System.out.println(i);
+				}
+				
+			}
+			
+		}, 0, 1, TimeUnit.SECONDS);
+			
+	}
+
+}
+```
+
+测试结果是：
+
+![测试结果](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/ScheduledExecutorService-test-result.png)
+
+结果显示，当程序抛出异常的时候，线程就不再运行了，也就是挂了。
+
+解决方法：
+
+- 1、直接加一个`try-catch`进行异常捕获，然后你可以打印你需要的异常信息或者处理异常。
+``` java
+public class ScheduledExecutorServiceThrowExceptionTest1 {
+	
+	private static int i = 0;
+	
+	public static void main(String[] args) {
+		ScheduledExecutorService exc = Executors.newSingleThreadScheduledExecutor();
+		exc.scheduleAtFixedRate(new Runnable(){
+
+			@Override
+			public void run() {
+				try {
+					// doSomething();// TODO：具体业务逻辑
+					i++;
+					if (i==6) {
+						throw new RuntimeException();
+					} else {
+						System.out.print(i + " ");
+					}
+				} catch (Exception ex) {
+					System.out.println();
+					System.out.println("在ScheduledExecutorService中有异常抛出，异常堆栈：" + ex.getStackTrace());
+				}
+			}
+			
+		}, 0, 1, TimeUnit.SECONDS);
+			
+	}
+
+}
+```
+结果是打印了异常信息，且线程没有被中断。
+``` java
+1 2 3 4 5 
+在ScheduledExecutorService中有异常抛出，异常堆栈：[Ljava.lang.StackTraceElement;@1bb53ed8
+7 8 9 10 11 12 13 
+```
+
+- 2、通过ScheduledFuture对象返回异常信息
+``` java
+public class ScheduledExecutorServiceThrowExceptionTest2 {
+
+	private static int i = 0;
+	
+	public static void main(String[] args) {
+		ScheduledExecutorService exc = Executors.newSingleThreadScheduledExecutor();
+		ScheduledFuture<?> handle = exc.scheduleAtFixedRate(new Runnable(){
+
+			@Override
+			public void run() {
+				i++;
+				if (i==6) {
+					throw new RuntimeException();
+				} else {
+					System.out.print(i + " ");
+				}
+				
+			}
+			
+		}, 0, 1, TimeUnit.SECONDS);
+		
+		try {
+			handle.get();
+		} catch(Exception ex) {
+			System.out.println();
+			System.out.println("在ScheduledExecutorService中有异常抛出，异常堆栈：" + ex.getStackTrace());
+		}
+			
+	}
+
+}
+```
+这个解决方法打印了异常信息，但是并没有阻止线程挂掉。
+``` java
+1 2 3 4 5 
+在ScheduledExecutorService中有异常抛出，异常堆栈：[Ljava.lang.StackTraceElement;@33909752
+```
+
+#### 总结
+
+一个ScheduledExecutorService启动的Java线程无故挂掉的原因是：如果使用者抛出异常，ScheduledExecutorService 将会停止线程的运行，而且不会报错，没有任何提示信息。解决方法是：`try-catch`将异常信息打印，或者用ScheduledFuture<?>获取线程运行结果。
+
+写的bug多，自然经验就多了，但是要注意总结。
+
+#### 完
+
+`2018年12月13日09:08:19`
