@@ -10,4 +10,8 @@ public enum EnumSingleton {
 	INSTANCE;
 	
 	public void whateverMethod() {}
+
+	public static EnumSingleton getInstance() {
+		return INSTANCE;
+	}
 }
