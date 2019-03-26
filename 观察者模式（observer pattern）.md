@@ -42,7 +42,7 @@
 
 #### 图示
 
-![]()
+![观察者模式UML图](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/observer-uml-diagram.jpg)
 
 ![]()
 
