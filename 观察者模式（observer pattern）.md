@@ -4,7 +4,7 @@
 
 #### 写在前面的话
 
-正值金三银四跳槽季，设计模式也是常问的问题之一。本人在3月2日的一次面试的二面中，问到设计模式，问到了观察者模式，而且要求写了伪代码。当时我脑子里就第一个想到的就是《大话设计模式》里面的一个例子，就是员工集体开小差炒股，前台小妹负责在老板回来时通知所有人。当时回答得结结巴巴，写得代码勉勉强强，惊喜的是二面过了。归，温习之。
+正值金三银四跳槽季，设计模式也是常问的问题之一。本人在3月2日的一次面试的二面中，问到设计模式，问到了观察者模式，而且要求写了伪代码。当时我脑子里就第一个想到的就是《大话设计模式》里面的一个例子，就是员工集体开小差，前台妹妹负责在老板回来时通知所有人。当时回答得结结巴巴，写得代码勉勉强强，惊喜的是二面过了。归，温习之。
 
 #### 定义
 
@@ -42,12 +42,88 @@
 
 #### 图示
 
-![观察者模式UML图](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/observer-uml-diagram.jpg)
+观察者类图：
 
-![]()
+![观察者模式类图](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/observer-uml-diagram.jpg)
+
+观察者序列图：
+
+![观察者序列图](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/observer-sequence-diagram.jpg)
 
 
 #### 代码示例
+
+代码示例就使用上面说过的那个例子，员工集体开小差，前台小妹负责在老板回来的时候通知所有人。
+
+首先，前台妹妹是具体主题角色，员工是具体观察者角色。其次，前台妹妹维护着观察者集合，在老板回来了这个状态上通知所有观察者；观察者在前台妹妹通知之后执行自己的更新方法，该干嘛干嘛。
+
+抽象主题：
+
+``` java
+public interface Observable {
+    public void attach(Observer observer);
+    public void detach(Observer observer);
+    public void notifyObservers();
+}
+```
+
+
+前台妹妹（具体主题即被观察者）：
+
+``` java
+public class Receptionist implements Observable {
+    private String state = "老板出去了";
+
+    private ArrayList<Observer> observers = new ArrayList<>();
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+        System.out.println(state);
+    }
+
+    @Override
+    public void attach(Observer observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void detach(Observer observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers() {
+        observers.forEach(observer -> observer.update());
+    }
+}
+````
+
+看NBA员工观察者：
+
+``` java
+public class NBAObserver implements  Observer{
+    @Override
+    public void update() {
+        System.out.println("正在看NBA直播的关掉NBA直播，工作");
+    }
+}
+```
+
+炒股员工观察者：
+
+``` java
+public class StockObserver implements Observer {
+    @Override
+    public void update() {
+        System.out.println("正在炒股的关闭股市面板，工作");
+    }
+}
+```
+
 
 
 
