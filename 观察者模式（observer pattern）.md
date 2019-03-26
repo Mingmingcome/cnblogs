@@ -20,11 +20,11 @@
 
 观察者模式可以解决什么问题：
 
-1、应该定义对象间一对多的依赖关系，而不使对象紧密耦合。（达到依赖关系，又不紧耦合）
+- 1、应该定义对象间一对多的依赖关系，而不使对象紧密耦合。（达到依赖关系，又不紧耦合）
 
-2、应该确保一个对象改变时，无限制的依赖对象自动更新。
+- 2、应该确保一个对象改变时，无限制的依赖对象自动更新。
 
-3、应该一个对象可以通知无限制的其他对象。
+- 3、应该一个对象可以通知无限制的其他对象。
 
 第2种情况，消息中间件就是实现之一，当一个生产者发送消息过来，无限制的消费者拿到消息自动更新自己。
 
@@ -100,7 +100,7 @@ public class Receptionist implements Observable {
         observers.forEach(observer -> observer.update());
     }
 }
-````
+```
 
 看NBA员工观察者：
 
@@ -124,18 +124,61 @@ public class StockObserver implements Observer {
 }
 ```
 
+观察者模式测试类：
 
+``` java
+public class ObserverTest {
+    public static void main(String[] args) {
+        Receptionist mm = new Receptionist();
 
+        Observer nba = new NBAObserver();
+        Observer stock = new StockObserver();
+
+        mm.attach(nba);
+        mm.attach(stock);
+        // mm看到老板回来了
+        mm.setState("老板回来了");
+        // 通知已经订阅的员工
+        mm.notifyObservers();
+    }
+}
+```
+
+测试结果：
+
+![测试结果](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/observer-test-result.png)
+
+笔记：明明是前台妹妹在观察老板是否回来了，为什么前台妹妹是被观察者呢？
+
+“老板回来了”这个状态是前台妹妹的内部状态，观察者模式是对象之间的关系，看NBA的和炒股的观察者监听前台妹妹的状态，发生变化时更新自己。
+
+#### Java类库中的观察者模式
+
+在java类库中有java.util.Observer和java.util.Observable作为观察者和被观察者，因为作用有限，在Java 9中已经弃用（deprecated）。
 
 #### 优点
 
+- 满足了当一个对象的改变需要改变其他对象这个条件的前提下，实现了松耦合。
+
+- 符合开闭原则，继承抽象主题添加被观察者，继承抽象观察者添加观察者。
 
 
 #### 缺点
 
+- 如果一个观察目标对象有很多直接和间接的观察者的话，将所有的观察者都通知到会花费很多时间。
+
+- 如果在观察者和观察目标之间有循环依赖的话，观察目标会触发它们之间进行循环调用，可能导致系统崩溃。
+
+- 观察者模式没有相应的机制让观察者知道所观察的目标对象是怎么发生变化的，而仅仅只是知道观察目标发生了变化。
 
 #### 总结
 
+观察者模式定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态发生变化时，会通知所有观察者对象，使它们能够自动更新自己。
+
 #### 参考
 
+《大话设计模式》
+
 #### 完
+
+`2019年3月26日15:02:09`
