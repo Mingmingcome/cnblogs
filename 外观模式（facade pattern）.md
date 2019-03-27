@@ -30,9 +30,17 @@
 
 #### 图示
 
+当一个系统拥有复杂的子系统时：
 
+![没有应用外观模式的系统](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/facade-without-facade.jpg)
+
+当使用了外观模式之后：
+
+![应用外观模式的系统](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/facade-with-facade.jpg)
 
 #### 代码示例
+
+例子：
 
 #### 模式扩展
 
