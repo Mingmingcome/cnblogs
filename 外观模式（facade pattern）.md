@@ -42,9 +42,85 @@
 
 例子：这里有一台计算机，开机需要CPU、硬盘、内存的配合，但是用户不需要知道CPU是否运行、硬盘是否被读取、内存是否被加载，计算机应用外观模式定义了一个开机键，用户只需要按了开机键就可以完成开机了。
 
+CPU类：
 
+``` java
+public class CPU {
+    public void freeze() {
+        System.out.println("CPU执行freeze操作");
+    }
+    public void jump() {
+        System.out.println("CPU执行jump操作");
+    }
+    public void execute() {
+        System.out.println("CPU正常运行");
+    }
+}
+```
 
+硬盘类：
 
+``` java
+public class HardDrive {
+    public void read() {
+        System.out.println("读取硬盘");
+    }
+}
+```
+
+内存类：
+
+``` java
+public class Memory {
+    public void load() {
+        System.out.println("将硬盘中读取到信息加载到运行内存");
+    }
+}
+```
+
+外观类：
+
+``` java
+public class ComputerFacade {
+    private CPU processor;
+    private Memory ram;
+    private HardDrive hd;
+
+    public ComputerFacade() {
+        this.processor = new CPU();
+        this.ram = new Memory();
+        this.hd = new HardDrive();
+    }
+
+    public void start() {
+        processor.freeze();
+        hd.read();
+        ram.load();
+        processor.jump();
+        processor.execute();
+        System.out.println("计算机正常启动完毕");
+    }
+}
+```
+
+start方法就是相当于开机键。
+
+测试类：
+
+``` java
+public class User {
+    public static void main(String[] args) {
+        ComputerFacade computerFacade = new ComputerFacade();
+        computerFacade.start();
+    }
+}
+```
+
+测试结果：
+
+![测试结果](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/facade-example-result.png)
+
+结果显示只需要调用外观类的start方法就可以启动计算机。
 
 #### 模式扩展
 
