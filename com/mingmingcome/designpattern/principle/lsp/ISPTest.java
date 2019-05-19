@@ -7,7 +7,7 @@ public class ISPTest {
         iLoveAnimal(dog);
         iLoveAnimal(mouse);
 //        iLoveDog(dog);
-        iLoveDog(mouse);
+//        iLoveDog(mouse);
     }
 
     public static void iLoveAnimal(Animal animal) {
