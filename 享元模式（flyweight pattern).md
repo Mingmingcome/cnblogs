@@ -247,6 +247,22 @@ public class CounterStrike {
 }
 ```
 
+输出：
+
+```
+恐怖分子已创建
+恐怖分子{task='放置炸弹', weapon='Maverick'}
+反恐精英已创建
+反恐精英{task='放置炸弹', weapon='AK-47'}
+恐怖分子{task='放置炸弹', weapon='AK-47'}
+反恐精英{task='放置炸弹', weapon='Gut Knife'}
+恐怖分子{task='放置炸弹', weapon='Desert Eagle'}
+反恐精英{task='放置炸弹', weapon='Desert Eagle'}
+恐怖分子{task='放置炸弹', weapon='Gut Knife'}
+恐怖分子{task='放置炸弹', weapon='AK-47'}
+反恐精英{task='放置炸弹', weapon='Gut Knife'}
+反恐精英{task='放置炸弹', weapon='AK-47'}
+```
 
 #### 优点
 
