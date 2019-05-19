@@ -84,19 +84,19 @@ LOVEmingcome
 
 #### 角色
 
-享元工厂（Flyweight Factory）：一个享元工厂，用来创建并管理Flyweight对象。它主要是用来确保合理地共享Flyweight，当用户请求一个Flyweight是，FlyweightFactory对象提供一个已创建的实例或者创建一个（如果不存在的话）。J
+<b>享元工厂（Flyweight Factory）</b>：一个享元工厂，用来创建并管理Flyweight对象。它主要是用来确保合理地共享Flyweight，当用户请求一个Flyweight是，FlyweightFactory对象提供一个已创建的实例或者创建一个（如果不存在的话）。J
 
-抽象享元（Flyweight）：所有具体享元的超类和接口，通过这个接口，Flyweight可以接受并作用于外部状态。
+<b>抽象享元（Flyweight）</b>：所有具体享元的超类和接口，通过这个接口，Flyweight可以接受并作用于外部状态。
 
-具体享元（Concrete Flyweight）：继承Flyweight超类或实现Flyweight接口，并为内部状态增加存储空间。
+<b>具体享元（Concrete Flyweight）</b>：继承Flyweight超类或实现Flyweight接口，并为内部状态增加存储空间。
 
-非共享具体享元（Unshared Concrete Flyweight）：指那些不需要共享的Flyweight子类。因为Flyweight接口共享成为可能，但他并不强制共享。
+<b>非共享具体享元（Unshared Concrete Flyweight）</b>：指那些不需要共享的Flyweight子类。因为Flyweight接口共享成为可能，但他并不强制共享。
 
 #### 内部状态和外部状态
 
-内部状态（intrinsic state）：可以用来共享的不变状态，在具体享元模式中
+<b>内部状态（intrinsic state）</b>：可以用来共享的不变状态，在具体享元模式中
 
-外部状态（extrinsic state）：可以作为参数传进来的可变状态
+<b>外部状态（extrinsic state）</b>：可以作为参数传进来的可变状态
 
 为了搞清楚内部状态和外部状态，我们来看一个例子。
 
@@ -112,14 +112,157 @@ LOVEmingcome
 
 #### 代码示例
 
-![]()
+<b>实现</b>：在反恐精英中恐怖分子和反恐精英的创建。我们有两个类，一个是恐怖分子Terrorist，另一个是反恐精英Counter Terrorist。当玩家要求一个武器weapon，我们分配给他一个武器。任务：恐怖分子负责放置炸弹，反恐精英负责拆除炸弹。
+
+<b>为什么在这个例子中使用享元模式？</b>因为我们需要减少玩家对象的数量，所以使用享元模式。如果我们不使用享元模式，当有n个玩家玩CS，那么我们需要创建n个对象。现在我们只需要创建两个对象即可，一个是恐怖分子，一个是反恐精英，我们可以在需要的时候一次又一次地重用他们。
+
+内部状态：对于两种类型的玩家来说，任务task是一个内部状态，因为对于所有恐怖分子（或者反恐精英）来说，任务总是一样的。
+
+外部状态：因为每个玩家可以携带任何他选择的武器，所以武器weapon是一个外部状态。武器作为参数由客户端传递。
+
+类图如下：
+
+![类图](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/flyweight-pattern-class-diagram.jpg)
+
+玩家接口：
+
+``` java
+public interface Player {
+    void assignWeapon(String weapon);
+}
+```
+
+恐怖分子：
+
+``` java
+public class Terrorist implements Player{
+    private final String task;
+
+    private String weapon;
+
+    public Terrorist() {
+        task = "放置炸弹";
+    }
+
+    @Override
+    public void assignWeapon(String weapon) {
+        this.weapon = weapon;
+    }
+
+    @Override
+    public String toString() {
+        return "恐怖分子{" +
+                "task='" + task + '\'' +
+                ", weapon='" + weapon + '\'' +
+                '}';
+    }
+}
+```
+
+反恐精英：
+
+``` java
+public class CounterTerrorist implements Player{
+    private final String task;
+
+    private String weapon;
+
+    public CounterTerrorist() {
+        task = "放置炸弹";
+    }
+
+    @Override
+    public void assignWeapon(String weapon) {
+        this.weapon = weapon;
+    }
+
+    @Override
+    public String toString() {
+        return "反恐精英{" +
+                "task='" + task + '\'' +
+                ", weapon='" + weapon + '\'' +
+                '}';
+    }
+}
+```
+
+玩家工厂：
+
+``` java
+public class PlayerFactory {
+    private static HashMap<String, Player> hm = new HashMap<>();
+
+    public static Player getPlayer(String playerType) {
+        Player p = null;
+
+        if (hm.containsKey(playerType)) {
+            p = hm.get(playerType);
+        } else {
+            switch (playerType) {
+                case "Terrorist":
+                    p = new Terrorist();
+                    System.out.println("恐怖分子已创建");
+                    break;
+                case "CounterTerrorist":
+                    p = new CounterTerrorist();
+                    System.out.println("反恐精英已创建");
+                    break;
+                default:
+                    System.out.println("无此玩家类型");
+            }
+            hm.put(playerType, p);
+        }
+        return p;
+    }
+}
+```
+
+CS客户端：
+
+``` java
+public class CounterStrike {
+    private static String[] playerType = {"Terrorist", "CounterTerrorist"};
+
+    private static String[] weapon = {"AK-47", "Maverick", "Gut Knife", "Desert Eagle"};
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 10; i++) {
+            Player p = PlayerFactory.getPlayer(getPlayerType());
+            p.assignWeapon(getWeapon());
+            System.out.println(p.toString());
+        }
+    }
+
+    private static String getPlayerType() {
+        Random r = new Random();
+        int i = r.nextInt(playerType.length);
+        return playerType[i];
+    }
+
+    private static String getWeapon() {
+        Random r = new Random();
+        int i = r.nextInt(weapon.length);
+        return weapon[i];
+    }
+}
+```
 
 
 #### 优点
 
+- 1、可以极大地减少内存中对象的数量，使得相同对宁或相似对象在内存中只保存一份。
+- 2、外部状态相对独立，而且不会影响其内部状态，从而使得享元对象可以在不同的环境中被共享。
+
 #### 缺点
+
+- 1、使得系统更加复杂，需要分离出内部状态和外部状态。
 
 #### 总结
 
+享元模式使用共享技术有效地支持大量细粒度的对象，减少内存中对象的数量。
+
+享元模式有内部状态和外部状态，内部状态可以共享，外部状态作为参数传入。
+
 #### 完     
 
+`2019年5月19日22:13:48`
