@@ -135,5 +135,7 @@ public class PrototypePatternTest{
 原型模式是通过拷贝原型对象实例来创建新的对象实例。
 
 #### 参考
+
 [Prototype design pattern in Java](https://howtodoinjava.com/design-patterns/creational/prototype-design-pattern-in-java/)
+
 #### 完
