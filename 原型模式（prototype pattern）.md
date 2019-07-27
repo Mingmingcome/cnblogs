@@ -40,7 +40,7 @@ java应用原型模式方法：实现Cloneable接口。
 
 类图：
 
-![]()
+![原型设计模式类图](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/prototype-pattern-class-diagram.jpg)
 
 抽象原型角色：
 
@@ -124,10 +124,16 @@ public class PrototypePatternTest{
 ```
 测试结果：
 
-![]()
+![原型模式测试结果](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/prototype-pattern-result.jpg)
 
 #### 优点
-#### 缺点
+
+使用原型模式创建对象对直接new一个对象在性能上要好得多，因为Object类的clone方法是一个本地方法，它直接操作内存中的二进制流，特别是复制大对象时，性能的差别比较明显。
+
 #### 总结
+
+原型模式是通过拷贝原型对象实例来创建新的对象实例。
+
 #### 参考
+[Prototype design pattern in Java](https://howtodoinjava.com/design-patterns/creational/prototype-design-pattern-in-java/)
 #### 完
