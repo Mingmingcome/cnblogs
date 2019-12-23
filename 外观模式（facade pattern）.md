@@ -32,13 +32,13 @@
 
 当一个系统拥有复杂的子系统时：
 
-![没有应用外观模式的系统](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/facade-without-facade.jpg)
+![没有应用外观模式的系统](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_facade-without-facade.jpg)
 
 不同的客户端调用了不同子系统类的时候，如第一个客户端调用了Class1和Class2，第二个客户端调用了Class1、Class2、Class3等，导致耦合紧密，对于开发来说不利于修改，对于用户来说不利于使用。
 
 当使用了外观模式之后：
 
-![应用外观模式的系统](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/facade-with-facade.jpg)
+![应用外观模式的系统](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_facade-with-facade.jpg)
 
 有了Facade外观类这个高层接口，耦合降低，开发不用一个个去问用户：“你们有没有使用到Class1这个类”，等到所有用户都确认了之后才开始动手，本来可能是几行代码的工作量，但是这个询问的过程都得好几天，谁用谁知道。对于用户来说也不需要关注子系统类是否修改，如果功能不变的话还是使用之前的接口方法，如果功能需要改变且现有的接口方法无法满足那只有提需求添加接口方法了。
 
@@ -122,7 +122,7 @@ public class User {
 
 测试结果：
 
-![测试结果](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/facade-example-result.png)
+![测试结果](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_facade-example-result.png)
 
 结果显示只需要调用外观类的start方法就可以启动计算机。
 

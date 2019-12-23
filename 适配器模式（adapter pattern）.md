@@ -49,12 +49,12 @@ Sun公司在1996年公开了Java语言的数据库连接工具JDBC，JDBC使得J
 #### 图示
 
 类适配器模式（adapter pattern）结构图：
-![类适配器模式](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/adapter-class-adapter.jpg)
+![类适配器模式](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_adapter-class-adapter.jpg)
 
 如上图，因为java没有类多继承，所以只能实现Target接口，而且Target只能是接口。Adapter实现了Target接口，继承了Adaptee类，Target.operation()实现为Adaptee.specificOperation()。
 
 客户端调用类适配器：
-![客户端调用类适配器](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/adapter-class-adapter.png)
+![客户端调用类适配器](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_adapter-class-adapter.png)
 
 这个图是Adapter适配器多继承的情况，引用维基百科，可以看到客户端调用适配器Adapter的methodA时候，实际上调用的是Adapter继承过来的method1到methodN。
 
@@ -62,7 +62,7 @@ Sun公司在1996年公开了Java语言的数据库连接工具JDBC，JDBC使得J
 
 一张图说明需求：
 
-![电源适配器](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/adapter-power-adapter.jpg)
+![电源适配器](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_adapter-power-adapter.jpg)
 
 嗯，就是电源适配器了。上面有这样两行：
 > 输入：100-240V ~ 0.5A 50-60HZ
@@ -126,7 +126,7 @@ public class ClassAdapterPatternTest {
 ```
 
 测试结果：
-![适配器模式示例测试结果](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/adapter-instance-result.jpg)
+![适配器模式示例测试结果](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_adapter-instance-result.jpg)
 
 ### 对象适配器模式（object  adapter pattern）
 
@@ -135,12 +135,12 @@ public class ClassAdapterPatternTest {
 #### 图示
 
 对象适配器模式（object adapter pattern）结构图：
-![对象适配器模式结构图](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/adapter-object-adapter.jpg)
+![对象适配器模式结构图](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_adapter-object-adapter.jpg)
 
 如上图，与类适配器模式不同的是，Adapter只实现了Target的接口，没有继承Adaptee，而是使用聚合的方式引用adaptee。
 
 客户端调用对象适配器：
-![客户端调用对象适配器](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/adapter-object-adapter.png)
+![客户端调用对象适配器](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_adapter-object-adapter.png)
 
 客户端调用对象适配器方法methodA的时候，实际上调用的是创建对象传进来的适配者实例的方法methodB。
 
@@ -202,7 +202,7 @@ java8之后：接口有了default方法，接口中的方法有了实现，因�
 #### 图示
 
 缺省适配器模式结构图：
-![缺省适配器模式结构图](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/adapter-default-adapter.jpg)
+![缺省适配器模式结构图](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_adapter-default-adapter.jpg)
 
 适配器Adapter类实现Target接口，方法默认为空。
 
@@ -323,7 +323,7 @@ public class DefaultAdapterTest {
 }
 ```
 测试类需要执行操作2，operator1添加SampleOperation时要实现接口里所有方法，operator2添加SampleOperation时只需要通过DefaultAdapter适配器添加自己需要的操作即可。毫无疑问，测试结果是一样的。
-![缺省适配器模式测试结果](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/adapter-default-adapter-result.jpg)
+![缺省适配器模式测试结果](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_adapter-default-adapter-result.jpg)
 
 #### 优点
 

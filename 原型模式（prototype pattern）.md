@@ -20,7 +20,7 @@
 
 原型模式结构图：
 
-![原型模式结构图](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/prototype-pattern-structure-diagram.jpg)
+![原型模式结构图](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_prototype-pattern-structure-diagram.jpg)
 
 #### 角色
 
@@ -40,7 +40,7 @@ java应用原型模式方法：实现Cloneable接口。
 
 类图：
 
-![原型设计模式类图](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/prototype-pattern-class-diagram.jpg)
+![原型设计模式类图](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_prototype-pattern-class-diagram.jpg)
 
 抽象原型角色：
 
@@ -124,7 +124,7 @@ public class PrototypePatternTest{
 ```
 测试结果：
 
-![原型模式测试结果](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/prototype-pattern-result.jpg)
+![原型模式测试结果](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618458/o_prototype-pattern-result.jpg)
 
 #### 优点
 

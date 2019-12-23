@@ -14,7 +14,7 @@
 
 我们在需要创建大量（例如10^5）的相似的对象时，使用享元模式。反正我从来没有需要创建这么多相似对象的时候，享元模式在真正的应用中用的要比较少，一般是一些底层数据结构使用到。比如，Java中的String。有图：
 
-![IDEA String类实例](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/flyweight-string.png)
+![IDEA String类实例](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_flyweight-string.png)
 
 图中的String类实例数就达到了20多万，所以String使用了享元模式。再看看大小，char[]和String对比，差了一个数量级。按道理来说，char[]和String的大小应该是差不多的啊，为什么呢？我们再看看源码：
 
@@ -108,7 +108,7 @@ LOVEmingcome
 
 享元模式结构图：
 
-![享元模式结构图](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/flyweight-pattern-structure.jpg)
+![享元模式结构图](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_flyweight-pattern-structure.jpg)
 
 #### 代码示例
 
@@ -122,7 +122,7 @@ LOVEmingcome
 
 类图如下：
 
-![类图](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/flyweight-pattern-class-diagram.jpg)
+![类图](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_flyweight-pattern-class-diagram.jpg)
 
 玩家接口：
 

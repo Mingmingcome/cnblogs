@@ -18,7 +18,7 @@
 
 于是，去找老大问一下问题怎么解决，老大说去生产数据库上导十万数据到测试库，然后在本地debug一下。接着，我就从数据库里面导出一万数据开始测试，在eclipse启动进程，日志写在本地文件。很快，问题再一次出现。然后断点，然后找到出问题的地方。出问题的地方如下：
 
-![问题地点](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/ScheduledExecutorService-throw-Exception.png)
+![问题地点](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_ScheduledExecutorService-throw-Exception.png)
 
 代码就一行：
 
@@ -68,11 +68,11 @@ at java.lang.Thread.run(Thread.java:662)
 
 但实际上我debug的时候，并没有看到打印的异常信息。我是断点到这一步，发现下一行代码没有执行，我就断定问题是在这里，而且空指针异常一下子就能看出来了。问题来了，为什么没有打印异常信息呢？我想应该是线程的问题，代码里启动这个写日志的定时任务用的是ScheduledExecutorService：
 
-![ScheduledExecutorService](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/ScheduledExecutorService-execute-thread.png)
+![ScheduledExecutorService](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_ScheduledExecutorService-execute-thread.png)
 
 我Google了一下，发现其实有很多前辈都曾遇到过这个问题。
 
-![Google搜索](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/ScheduledExecutorService-Google-search.png)
+![Google搜索](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_ScheduledExecutorService-Google-search.png)
 
 在这些文章中，我找到了我要的答案。我引用其中的一篇文章[从一个java线程挂掉的例子讨论分析定位问题基本原则](http://mingxinglai.com/cn/2016/05/java-thread-crash/)文字作为答案吧。
 
@@ -114,7 +114,7 @@ public class ScheduledExecutorServiceThrowExceptionTest {
 
 测试结果是：
 
-![测试结果](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/ScheduledExecutorService-test-result.png)
+![测试结果](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_ScheduledExecutorService-test-result.png)
 
 结果显示，当程序抛出异常的时候，线程就不再运行了，也就是挂了。
 

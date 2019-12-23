@@ -72,7 +72,7 @@ public class Money{}
 
 #### 图示
 
-![桥接模式结构图](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/bridge-pattern-structure.jpg)
+![桥接模式结构图](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_bridge-pattern-structure.jpg)
 
 抽象（Abstraction）和实现（Implementor）以组合的方式关联起来，抽象的动作行为是由实现来执行。抽象和实现都可以有它们各自的变化，被多个子类继承，拥有不同的功能。
 
@@ -193,7 +193,7 @@ public class BridgePatternTest {
 ```
 
 测试结果：
-![桥接模式测试结果](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/bridge-pattern-result.png)
+![桥接模式测试结果](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_bridge-pattern-result.png)
 
 结果表明了：抽象和实现分离，各自变化。订单存在着两个维度变化，一个是种类，一个是制造方式，种类分为蛋糕和糖果，制造方式有手工和机器。
 #### 其他实例

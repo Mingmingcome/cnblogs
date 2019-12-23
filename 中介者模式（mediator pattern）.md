@@ -30,7 +30,7 @@
 
 中介者模式结构图：
 
-![中介者模式结构图](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/mediator-pattern-structure.jpg)
+![中介者模式结构图](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_mediator-pattern-structure.jpg)
 
 #### 角色
 
@@ -47,7 +47,7 @@
 
 类图：
 
-![中介者模式类图](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/mediator-class-diagram.JPG)
+![中介者模式类图](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_mediator-class-diagram.JPG)
 
 抽象中介者角色：
 
@@ -154,7 +154,7 @@ public class MediatorPatternTest {
 
 测试结果：
 
-![中介者模式测试结果](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/mediator-pattern-result.jpg)
+![中介者模式测试结果](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_mediator-pattern-result.jpg)
 
 #### 使用场景
 
@@ -164,11 +164,11 @@ public class MediatorPatternTest {
 
 在这个很大的村子里面，每个人要给不同人的送信，这种关系成网状结构，错综复杂。
 
-![应用中介者模式前](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/mediator-pattern-before-relationship.jpg)
+![应用中介者模式前](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_mediator-pattern-before-relationship.jpg)
 
 加入邮局中介者之后，成星状结构，每个人只和邮局有关系。
 
-![应用中介者模式后](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/mediator-pattern-after-relationship.jpg)
+![应用中介者模式后](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_mediator-pattern-after-relationship.jpg)
 
 总结：系统中存在很多对象，对象间存在复杂的关系，在复杂的关系中存在共性交互行为，封装共性交互行为就是中介者。
 

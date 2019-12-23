@@ -44,11 +44,11 @@
 
 观察者类图：
 
-![观察者模式类图](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/observer-uml-diagram.jpg)
+![观察者模式类图](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_observer-uml-diagram.jpg)
 
 观察者序列图：
 
-![观察者序列图](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/observer-sequence-diagram.jpg)
+![观察者序列图](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_observer-sequence-diagram.jpg)
 
 
 #### 代码示例
@@ -146,7 +146,7 @@ public class ObserverTest {
 
 测试结果：
 
-![测试结果](https://raw.githubusercontent.com/Mingmingcome/cnblogs/master/images/observer-test-result.png)
+![测试结果](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_observer-test-result.png)
 
 笔记：明明是前台妹妹在观察老板是否回来了，为什么前台妹妹是被观察者呢？
 
