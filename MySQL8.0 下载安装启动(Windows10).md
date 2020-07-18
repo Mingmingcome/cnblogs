@@ -64,7 +64,7 @@ F:\mysql-8.0.16-winx64\bin>mysqld --console
 2019-06-14T11:20:18.071514Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Bind-address: '::' port: 33060
 ```
 
-在命令行中只需“CRTL + C”就可以关闭数据库，也可以使用
+在命令行中只需“CRTL + C”就可以关闭数据库，也可以使用`mysqladmin -u root shutdown`。
 
 
 #### 登录

@@ -154,7 +154,7 @@ public class MediatorPatternTest {
 
 测试结果：
 
-![中介者模式测试结果](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_mediator-pattern-result.jpg)
+![中介者模式测试结果](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_200408142834mediator-pattern-result.jpg)
 
 #### 使用场景
 
