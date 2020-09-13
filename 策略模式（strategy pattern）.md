@@ -68,7 +68,7 @@ public class TalentedTaoLu implements TaoLu {
 ```
 
 上下文角色（KuiHuaBaoDian.java）：
-``` jav
+``` java
 // 葵花宝典
 public class KuiHuaBaoDian {
     // 持有套路（Strategy）的引用
