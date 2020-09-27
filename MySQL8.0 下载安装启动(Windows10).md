@@ -19,7 +19,7 @@ my.ini是MySQL安装的配置文件
 ``` ini
 [mysql]
 # 设置mysql客户端默认字符集
-default-character-set=utf8mb4
+default-character-set=utf8
 [mysqld]
 # 设置3306端口
 port=3306
