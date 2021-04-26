@@ -14,8 +14,7 @@
 
 #### 定义
 
->Without violating encapsulation, capture and externalize an object's internal
-state so that the object can be restored to this state later. ——《Design Patterns: Elements of Reusable Object-Oriented Software》
+>Without violating encapsulation, capture and externalize an object's internal state so that the object can be restored to this state later. ——《Design Patterns: Elements of Reusable Object-Oriented Software》
 
 备忘录模式（memento pattern），在不破坏封装型的前提下，获取并保存一个对象的内部状态，以便以后对象可以恢复到这个状态。——《设计模式：可复用面向对象软件的基础》
 
