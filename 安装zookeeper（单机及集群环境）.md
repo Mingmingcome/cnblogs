@@ -59,16 +59,19 @@ server.4=192.168.0.166:2888:3888
 
 创建myid
 vi ${dataDir}/myid
-文件里只记录server.x中x，dataDir默认为/tmp/zookeeper
+配置文件zoo.cfg里只记录server.x中x，dataDir默认为/tmp/zookeeper
 
+使用zkServer.sh status查看集群中节点的角色，如`Mode: leader`
+``` bash
+[luhaoming@localhost bin]$ ./zkServer.sh status
+/usr/bin/java
+ZooKeeper JMX enabled by default
+Using config: /home/luhaoming/apache-zookeeper-3.6.1-bin/bin/../conf/zoo.cfg
+Client port found: 2181. Client address: localhost.
+Mode: leader
+```
 
-
-
-
-
-
-
-
+完
 
 
 
