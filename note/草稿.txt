@@ -1,0 +1,11 @@
+2021年9月3日11:30:19
+
+设计表
+
+关联是使用不变的主键ID，还是使用有可能变的编码
+
+
+jdbc:mysql://127.0.0.1:3306/pet_mall?useUnicode=true&characterEncoding=utf8
+
+
+alter table `table_name` convert to character set utf8 COLLATE utf8_bin;
