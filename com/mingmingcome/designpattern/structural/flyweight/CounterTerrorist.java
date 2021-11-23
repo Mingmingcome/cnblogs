@@ -12,12 +12,17 @@ public class CounterTerrorist implements Player{
     private String weapon;
 
     public CounterTerrorist() {
-        task = "放置炸弹";
+        task = "拆除炸弹";
     }
 
     @Override
     public void assignWeapon(String weapon) {
         this.weapon = weapon;
+    }
+
+    @Override
+    public String getTask() {
+        return task;
     }
 
     @Override
