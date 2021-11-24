@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.mingmingcome.designpattern.structural.flyweight.CounterStrike</OriginalElement>
+  <nodes>
+    <node x="284.275" y="396.0">com.mingmingcome.designpattern.structural.flyweight.CounterStrike</node>
+    <node x="291.60833333333335" y="0.0">com.mingmingcome.designpattern.structural.flyweight.Player</node>
+    <node x="237.5" y="287.0">com.mingmingcome.designpattern.structural.flyweight.PlayerFactory</node>
+    <node x="0.0" y="132.0">com.mingmingcome.designpattern.structural.flyweight.Terrorist</node>
+    <node x="225.0" y="132.0">com.mingmingcome.designpattern.structural.flyweight.CounterTerrorist</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.mingmingcome.designpattern.structural.flyweight.Terrorist" target="com.mingmingcome.designpattern.structural.flyweight.Player">
+      <point x="0.0" y="-52.5" />
+      <point x="102.5" y="112.0" />
+      <point x="312.10833333333335" y="112.0" />
+      <point x="-82.0" y="41.0" />
+    </edge>
+    <edge source="com.mingmingcome.designpattern.structural.flyweight.CounterStrike" target="com.mingmingcome.designpattern.structural.flyweight.Player">
+      <point x="85.66666666666669" y="-64.0" />
+      <point x="498.44166666666666" y="371.0" />
+      <point x="471.05833333333334" y="371.0" />
+      <point x="471.05833333333334" y="112.0" />
+      <point x="476.10833333333335" y="112.0" />
+      <point x="82.0" y="41.0" />
+    </edge>
+    <edge source="com.mingmingcome.designpattern.structural.flyweight.CounterStrike" target="com.mingmingcome.designpattern.structural.flyweight.PlayerFactory">
+      <point x="-85.66666666666669" y="-64.0" />
+      <point x="327.1083333333333" y="371.0" />
+      <point x="329.0" y="371.0" />
+      <point x="0.0" y="29.5" />
+    </edge>
+    <edge source="com.mingmingcome.designpattern.structural.flyweight.PlayerFactory" target="com.mingmingcome.designpattern.structural.flyweight.Player">
+      <point x="61.0" y="-29.5" />
+      <point x="390.0" y="262.0" />
+      <point x="443.5" y="262.0" />
+      <point x="443.5" y="112.0" />
+      <point x="394.10833333333335" y="112.0" />
+      <point x="0.0" y="41.0" />
+    </edge>
+    <edge source="com.mingmingcome.designpattern.structural.flyweight.CounterTerrorist" target="com.mingmingcome.designpattern.structural.flyweight.Player">
+      <point x="0.0" y="-52.5" />
+      <point x="329.0" y="112.0" />
+      <point x="353.10833333333335" y="112.0" />
+      <point x="-41.0" y="41.0" />
+    </edge>
+    <edge source="com.mingmingcome.designpattern.structural.flyweight.PlayerFactory" target="com.mingmingcome.designpattern.structural.flyweight.CounterTerrorist">
+      <point x="0.0" y="-29.5" />
+      <point x="0.0" y="52.5" />
+    </edge>
+    <edge source="com.mingmingcome.designpattern.structural.flyweight.PlayerFactory" target="com.mingmingcome.designpattern.structural.flyweight.Terrorist">
+      <point x="-61.0" y="-29.5" />
+      <point x="268.0" y="262.0" />
+      <point x="102.5" y="262.0" />
+      <point x="0.0" y="52.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="271.0" y="262.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
