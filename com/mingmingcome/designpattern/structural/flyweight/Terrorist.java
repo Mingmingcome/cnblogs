@@ -21,6 +21,11 @@ public class Terrorist implements Player{
     }
 
     @Override
+    public String getTask() {
+        return task;
+    }
+
+    @Override
     public String toString() {
         return "恐怖分子{" +
                 "task='" + task + '\'' +

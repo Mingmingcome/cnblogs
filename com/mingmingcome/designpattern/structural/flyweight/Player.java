@@ -8,4 +8,5 @@ package com.mingmingcome.designpattern.structural.flyweight;
  */
 public interface Player {
     void assignWeapon(String weapon);
+    String getTask();
 }
