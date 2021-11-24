@@ -129,6 +129,7 @@ LOVEmingcome
 ``` java
 public interface Player {
     void assignWeapon(String weapon);
+    String getTask();
 }
 ```
 
@@ -150,6 +151,11 @@ public class Terrorist implements Player{
     }
 
     @Override
+    public String getTask() {
+        return task;
+    }
+
+    @Override
     public String toString() {
         return "恐怖分子{" +
                 "task='" + task + '\'' +
@@ -168,12 +174,17 @@ public class CounterTerrorist implements Player{
     private String weapon;
 
     public CounterTerrorist() {
-        task = "放置炸弹";
+        task = "拆除炸弹";
     }
 
     @Override
     public void assignWeapon(String weapon) {
         this.weapon = weapon;
+    }
+
+    @Override
+    public String getTask() {
+        return task;
     }
 
     @Override
@@ -190,27 +201,20 @@ public class CounterTerrorist implements Player{
 
 ``` java
 public class PlayerFactory {
-    private static HashMap<String, Player> hm = new HashMap<>();
 
     public static Player getPlayer(String playerType) {
         Player p = null;
-
-        if (hm.containsKey(playerType)) {
-            p = hm.get(playerType);
-        } else {
-            switch (playerType) {
-                case "Terrorist":
-                    p = new Terrorist();
-                    System.out.println("恐怖分子已创建");
-                    break;
-                case "CounterTerrorist":
-                    p = new CounterTerrorist();
-                    System.out.println("反恐精英已创建");
-                    break;
-                default:
-                    System.out.println("无此玩家类型");
-            }
-            hm.put(playerType, p);
+        switch (playerType) {
+            case "Terrorist":
+                p = new Terrorist();
+                System.out.println("恐怖分子已创建");
+                break;
+            case "CounterTerrorist":
+                p = new CounterTerrorist();
+                System.out.println("反恐精英已创建");
+                break;
+            default:
+                System.out.println("无此玩家类型");
         }
         return p;
     }
@@ -225,11 +229,51 @@ public class CounterStrike {
 
     private static String[] weapon = {"AK-47", "Maverick", "Gut Knife", "Desert Eagle"};
 
-    public static void main(String[] args) {
+    private static List<Player> terrorist = new ArrayList<>();
+    private static List<Player> counterTerrorist = new ArrayList<>();
+
+    public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {
         for (int i = 0; i < 10; i++) {
-            Player p = PlayerFactory.getPlayer(getPlayerType());
+            String playerType = getPlayerType();
+            Player p = PlayerFactory.getPlayer(playerType);
             p.assignWeapon(getWeapon());
-            System.out.println(p.toString());
+            System.out.println(p);
+            if ("Terrorist".equals(playerType)) {
+                terrorist.add(p);
+            } else {
+                counterTerrorist.add(p);
+            }
+        }
+        test(terrorist, counterTerrorist);
+    }
+
+    private static void test(List<Player> terrorist, List<Player> counterTerrorist) throws IllegalAccessException, NoSuchFieldException {
+        // 测试成果标志
+        boolean flag = true;
+        for (int i = 0; i < terrorist.size(); i++) {
+            for (int j = 0; j < terrorist.size(); j++) {
+                // 所有恐怖分子的内部状态都是一致的，即task一致
+                if (terrorist.get(i).getTask().equals(terrorist.get(j).getTask())) {
+                    continue;
+                } else {
+                    flag = false;
+                }
+            }
+        }
+        for (int i = 0; i < counterTerrorist.size(); i++) {
+            for (int j = 0; j < counterTerrorist.size(); j++) {
+                // 所有反恐精英的内部状态都是一致的，即task一致
+                if (counterTerrorist.get(i).getTask().equals(counterTerrorist.get(j).getTask())) {
+                    continue;
+                } else {
+                    flag = false;
+                }
+            }
+        }
+        if (flag) {
+            System.out.println("享元模式验证成功");
+        } else {
+            System.out.println("享元模式验证失败");
         }
     }
 
@@ -250,18 +294,27 @@ public class CounterStrike {
 输出：
 
 ```
+反恐精英已创建
+反恐精英{task='拆除炸弹', weapon='AK-47'}
+反恐精英已创建
+反恐精英{task='拆除炸弹', weapon='Desert Eagle'}
+反恐精英已创建
+反恐精英{task='拆除炸弹', weapon='Gut Knife'}
+反恐精英已创建
+反恐精英{task='拆除炸弹', weapon='AK-47'}
 恐怖分子已创建
 恐怖分子{task='放置炸弹', weapon='Maverick'}
 反恐精英已创建
-反恐精英{task='放置炸弹', weapon='AK-47'}
+反恐精英{task='拆除炸弹', weapon='Desert Eagle'}
+恐怖分子已创建
 恐怖分子{task='放置炸弹', weapon='AK-47'}
-反恐精英{task='放置炸弹', weapon='Gut Knife'}
-恐怖分子{task='放置炸弹', weapon='Desert Eagle'}
-反恐精英{task='放置炸弹', weapon='Desert Eagle'}
+恐怖分子已创建
 恐怖分子{task='放置炸弹', weapon='Gut Knife'}
+反恐精英已创建
+反恐精英{task='拆除炸弹', weapon='AK-47'}
+恐怖分子已创建
 恐怖分子{task='放置炸弹', weapon='AK-47'}
-反恐精英{task='放置炸弹', weapon='Gut Knife'}
-反恐精英{task='放置炸弹', weapon='AK-47'}
+享元模式验证成功
 ```
 
 #### 优点
