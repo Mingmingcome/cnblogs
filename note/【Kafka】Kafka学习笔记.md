@@ -20,7 +20,7 @@ https://blog.csdn.net/fuck487/article/details/107562890
 bin/kafka-server-start.sh config/server.properties &
 bin/kafka-server-start.sh config/server-1.properties &
 bin/kafka-server-start.sh config/server-2.properties &
-# 停止
+# 停止 
 bin/kafka-server-stop.sh config/server.properties &
 bin/kafka-server-stop.sh config/server-1.properties &
 bin/kafka-server-stop.sh config/server-2.properties &
@@ -69,4 +69,16 @@ acks=all这意味着领导者将等待完整的同步副本集来确认记录。
 - 手动提交
  - 同步提交
  - 异步提交
+
+## Kafka存储方法
+
+#### partition 和 segment
+
+![Kafka文件存储机制那些事](https://tech.meituan.com/2015/01/13/kafka-fs-design-theory.html)
+
+partition文件由多个大小一致的segment组成，segment有.index和.log文件组成，分别是索引文件和数据文件
+
+#### 副本数据同步机制
+
+通过HW(High Watermark)和LEO(Last End Offset)维护ISR(In-Sync Replica)，
 
