@@ -80,5 +80,9 @@ partition文件由多个大小一致的segment组成，segment有.index和.log�
 
 #### 副本数据同步机制
 
-通过HW(High Watermark)和LEO(Last End Offset)维护ISR(In-Sync Replica)，
+通过HW(High Watermark)和LEO(Last End Offset)维护ISR(In-Sync Replica)
+
+##### 零拷贝技术
+
+##### raft协议
 
