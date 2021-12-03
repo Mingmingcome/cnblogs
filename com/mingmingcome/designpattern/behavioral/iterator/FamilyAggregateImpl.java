@@ -8,6 +8,7 @@ import java.util.List;
  * @when 2021/12/1 20:26
  * @what 家集合实现类
  */
+// 具体集合类
 public class FamilyAggregateImpl implements FamilyAggregate {
 
     private int generation;
@@ -36,6 +37,7 @@ public class FamilyAggregateImpl implements FamilyAggregate {
         return new NameIteratorImpl();
     }
 
+    // 具体迭代器
     private class NameIteratorImpl implements NameIterator {
 
         int currentGeneration;
