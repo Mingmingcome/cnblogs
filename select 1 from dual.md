@@ -48,13 +48,13 @@
 
 >For example:
 >比如：
-``` sql
+```sql
 mysql> SELECT 1 + 1;
     -> 2
 ```
 >You are permitted to specify `DUAL` as a dummy table name in situations where no tables are referenced:
 >在没有引用表的情况下，你可以指定`DUAL`为一个虚拟表名。
-``` sql
+```sql
 mysql> SELECT 1 + 1 FROM DUAL;
     -> 2
 ```
@@ -62,7 +62,7 @@ mysql> SELECT 1 + 1 FROM DUAL;
 >`DUAL`单纯是为那些要求所有`SELECT`语句应该有`FROM`或者其他子句的人们提供便利。MySQL可能忽略这个子句。即使没有表引用，MySQL也不要求`FROM DUAL`。
 
 在MySQL中使用dual表并不总是对的：
-``` sql
+```sql
 mysql> select 1 from dual;
 3013 - Unknown table ****.dual
 ```

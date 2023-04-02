@@ -51,14 +51,14 @@
 具体代码如下：
 
 抽象命令角色(Command.java)：
-``` java
+```java
 public interface Command {
     void execute();
 }
 ```
 
 具体命令角色(CopyCommand.java、PasteCommand.java)：
-``` java
+```java
 public class CopyCommand implements Command {
     private Text receiver;
 
@@ -87,7 +87,7 @@ public class PasteCommand implements Command {
 ```
 
 调用者角色(Menu.java)：
-``` java
+```java
 public class Menu {
     private static Map<String, Command> commandMap = new HashMap<>();
 
@@ -103,7 +103,7 @@ public class Menu {
 ```
 
 接收者(Text.java):
-``` java
+```java
 public class Text {
     public void copy() {
         System.out.println("复制成功");
@@ -116,7 +116,7 @@ public class Text {
 
 
 客户端角色(Menu.java)：
-``` java
+```java
 public class Notepad {
     public static void main(String[] args) {
         // 打开文件
@@ -147,7 +147,7 @@ public class Notepad {
 ![复制粘贴命令](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_210516033707command-pattern-duplicate.jpg)
 
 代码如下：
-``` java
+```java
 public class DuplicateCommand implements Command {
     private List<Command> commandList;
     
@@ -173,7 +173,7 @@ public class DuplicateCommand implements Command {
 
 修改后的接收者角色，也是备忘录模式中的备忘录角色：
 
-``` java
+```java
 public class TextWithUndo {
     private StringBuilder content;
 
@@ -198,7 +198,7 @@ public class TextWithUndo {
 
 修改后的具体命令角色，备忘录的发起人角色：
 
-``` java
+```java
 public class PasteCommandWithUndo implements Command {
     private TextWithUndo receiver;
     private UndoCommandCaretaker commandCaretaker;
@@ -223,7 +223,7 @@ public class PasteCommandWithUndo implements Command {
 ```
 
 备忘录管理者角色：
-``` java
+```java
 public class UndoCommandCaretaker {
     private List<TextWithUndo> receiverList = new ArrayList<>();
 
@@ -239,7 +239,7 @@ public class UndoCommandCaretaker {
 
 修改后的客户端：
 
-``` java
+```java
 public class NotepadWithUndo {
     public static void main(String[] args) {
         // 打开文件

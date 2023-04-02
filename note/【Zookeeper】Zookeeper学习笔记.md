@@ -66,7 +66,7 @@ vi ${dataDir}/myid
 配置文件zoo.cfg里只记录server.x中x，dataDir默认为/tmp/zookeeper
 
 使用zkServer.sh status查看集群中节点的角色，如`Mode: leader`
-``` bash
+```bash
 [luhaoming@localhost bin]$ ./zkServer.sh status
 /usr/bin/java
 ZooKeeper JMX enabled by default

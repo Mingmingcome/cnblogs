@@ -1,4 +1,4 @@
-``` SQL
+```SQL
 CREATE USER 'slave'@'192.168.102.148' IDENTIFIED BY 'slave'; 
 GRANT REPLICATION SLAVE ON *.* TO 'slave'@'192.168.102.148';
 flush privileges;
@@ -37,7 +37,7 @@ Slave failed to initialize relay log info structure from the repository
 
 
 
-``` 
+```
 2020-09-21T02:12:11.668970Z 26 [ERROR] [MY-010584] [Repl] Slave I/O for channel '': error connecting to master 'slave@localhost:3306' - retry-time: 60  retries: 5, Error_code: MY-002061
 2020-09-21T02:13:11.680100Z 26 [ERROR] [MY-010584] [Repl] Slave I/O for channel '': error connecting to master 'slave@localhost:3306' - retry-time: 60  retries: 6, Error_code: MY-002061
 2020-09-21T02:14:11.699180Z 26 [ERROR] [MY-010584] [Repl] Slave I/O for channel '': error connecting to master 'slave@localhost:3306' - retry-time: 60  retries: 7, Error_code: MY-002061

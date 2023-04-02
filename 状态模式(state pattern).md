@@ -29,7 +29,7 @@ open表示开启连接，close表示关闭连接，synchronize表示同步，ack
 
 如果我现在有TCPConnection类，接收请求后需要表现什么行为，那么可能是着这样子：
 
-``` java
+```java
 public class TCPConnection {
     private String state;
 
@@ -66,7 +66,7 @@ public class TCPConnection {
 
 状态模式将状态抽象出来，封装状态相对应的操作，当状态转换时，操作也跟着转换。每个具体状态只需要一个，具体状态类提供
 
-``` java
+```java
 // TCP连接
 public class TCPConnectionUseStatePattern {
     private TCPState tcpState;
@@ -167,7 +167,7 @@ public class EstablishedState implements TCPState {
 talk is cheap, show you code.
 
 <b>上下文角色（Context）:</b>
-``` java
+```java
 // 饮料自动售卖机
 public class DrinksVendingMachine {
     private DrinksVendingMachineState state;
@@ -237,7 +237,7 @@ public class DrinksVendingMachine {
 ```
 
 <b>抽象状态类（State）:</b>
-``` java
+```java
 // 自动售卖机状态
 public interface DrinksVendingMachineState {
     void insertCoin(DrinksVendingMachine drinksVendingMachine);
@@ -247,7 +247,7 @@ public interface DrinksVendingMachineState {
 ```
 
 <b>具体抽象类（ConcreteState）：</b>
-``` java
+```java
 // 有硬币有饮料
 public class HasCoinAndDrinks implements DrinksVendingMachineState {
     @Override
@@ -342,7 +342,7 @@ public class NoCoinNoDrinks implements DrinksVendingMachineState {
 ```
 
 测试类（StatePatternTest）：
-``` java
+```java
 public class StatePatternTest {
     public static void main(String[] args) {
         // 1.初始化状态：NoCoinNoDrinks

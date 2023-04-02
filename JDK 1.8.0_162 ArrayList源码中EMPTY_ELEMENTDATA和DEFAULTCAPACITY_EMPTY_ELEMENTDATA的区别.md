@@ -11,7 +11,7 @@
 本文只是讨论JDK 1.8.0_162中EMPTY_ELEMENTDATA和DEFAULTCAPACITY_EMPTY_ELEMENTDATA的区别，关于源码详细解读请Google。
 
 在ArrayList中有关EMPTY_ELEMENTDATA（下文用EE代替）和DEFAULTCAPACITY_EMPTY_ELEMENTDATA（下文用DEE代替）的声明定义如下：
-``` java
+```java
 /**
  * Shared empty array instance used for empty instances.
  * 用于ArrayList空实例的共享空数组实例
@@ -31,7 +31,7 @@ private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = {};
 这两个类常量EE和DEE都是表示空数组，只是名字不一样而已。
 
 三个构造函数：
-``` java
+```java
 /**
  * 有参
  */
@@ -72,7 +72,7 @@ public ArrayList(Collection<? extends E> c) {
 ```
 
 其中无参构造器创建的实例al的elementData是DEE，有参构造函数创建的空实例al1和al2的elementData是EE。即：
-``` java
+```java
 // elementData = DEE
 ArrayList<String> al = new ArrayList<String>();
 
@@ -82,7 +82,7 @@ ArrarList<String> al2 = new ArrayList<String>(al1)
 ```
 
 接下来看看add(E e)方法：
-``` java
+```java
 public boolean add(E e) {
     ensureCapacityInternal(size + 1);  // Increments modCount!!
     elementData[size++] = e;
@@ -112,7 +112,7 @@ private void ensureExplicitCapacity(int minCapacity) {
 ```
 
 其他add方法如：add(int index, E element)、addAll(Collection<? extends E> c)、addAll(int index, Collection<? extends E> c)中都有ensureCapacityInternal(int minCapacity)方法，确保无参构成函数创建的实例al在添加第一个元素时，<i>最小的容量</i>是默认大小10。那有参构造函数创建的空实例al1、al2在通过add(E e)添加元素的时候是怎么样的呢？al1、al2容量增长是这样子的：0->1->2->3->4->6->9->13...，这样的增长是很慢的。具体扩容方式：
-``` java
+```java
 private void grow(int minCapacity) {
     // overflow-conscious code
     int oldCapacity = elementData.length;
@@ -130,7 +130,7 @@ private void grow(int minCapacity) {
 问题：两个类常量都是表示空数组，为什么要用两个呢？在Java7中只有一个类常量表示空数组，就是EE。Java8中添加了DEE代替了EE。
 
 在Java7中ArrayList的构造函数：
-``` java
+```java
 public ArrayList(int initialCapacity) {
    super();
    if (initialCapacity < 0)

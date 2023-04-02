@@ -72,7 +72,7 @@ Sun公司在1996年公开了Java语言的数据库连接工具JDBC，JDBC使得J
 我们的需求就是将电源输入220V（适配者）转换为5V输出（目标）。
 
 目标角色（PowerTarget.java）：
-``` java
+```java
 public interface PowerTarget {
 	public int output5V();
 }
@@ -80,7 +80,7 @@ public interface PowerTarget {
 电源目标。
 
 适配者角色（PowerAdaptee.java）：
-``` java
+```java
 public class PowerAdaptee {
 	private int output =  220;
 	public int output220V() {
@@ -92,7 +92,7 @@ public class PowerAdaptee {
 电源适配者。
 
 适配器角色（PowerAdapter.java）：
-``` java
+```java
 public class PowerAdapter extends PowerAdaptee implements PowerTarget{
 	
 	@Override
@@ -107,7 +107,7 @@ public class PowerAdapter extends PowerAdaptee implements PowerTarget{
 }
 ```
 电源适配器类实现了电源目标，继承了适配者。其实如果没有我打印的那些提示或者说日志，output5V方法可以直接写成：
-``` java
+```java
 public int output5V() {
 		return output220V()/44;
 	}
@@ -115,7 +115,7 @@ public int output5V() {
 这样就适配了。
 
 类适配器模式测试类（ClassAdapterPatternTest.java）：
-``` java
+```java
 public class ClassAdapterPatternTest {
 	
 	public static void main(String[] args) {
@@ -149,7 +149,7 @@ public class ClassAdapterPatternTest {
 代码示例和类适配器模式只有Adapter类有不同，其他完成一样，连测试结果都是一样。下面只贴上Adapter类。
 
 适配器角色（Adapter.java）：
-``` java
+```java
 public class PowerAdapter implements PowerTarget{
 	private PowerAdaptee powerAdaptee;
 
@@ -209,7 +209,7 @@ java8之后：接口有了default方法，接口中的方法有了实现，因�
 #### 代码示例
 
 目标角色（SampleOperation.java）：
-``` java
+```java
 public interface SampleOperation {
 	public abstract void operation1();
 	public abstract void operation2();
@@ -222,7 +222,7 @@ public interface SampleOperation {
 包含了很多操作。
 
 适配器角色（DefaultAdapter.java）：
-``` java
+```java
 public abstract class DefaultAdapter implements SampleOperation{
 
 	@Override
@@ -249,7 +249,7 @@ public abstract class DefaultAdapter implements SampleOperation{
 默认实现了所有操作
 
 这个是测试缺省适配器模式需要用到的类（Operator.java）：
-``` java
+```java
 public class Operator {
 	private SampleOperation sampleOperation;
 	
@@ -280,7 +280,7 @@ public class Operator {
 ```
 
 缺省适配器模式测试类（DefaultAdapterTest.java）：
-``` java
+```java
 public class DefaultAdapterTest {
 
 	public static void main(String[] args) {

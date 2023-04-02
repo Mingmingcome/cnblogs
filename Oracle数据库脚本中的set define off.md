@@ -16,7 +16,7 @@ SET DEFINE命令改变标记替代变量的前缀字符。你可以使用SET DEF
 
 #### 语法
 
-``` sql
+```sql
 SET DEF[INE] {OFF | ON | prefix_char}
 ```
 
@@ -38,7 +38,7 @@ SET DEF[INE] {OFF | ON | prefix_char}
 #### 例子
 
 开启替代变量：
-``` sql
+```sql
 SQL> insert into customers (customer_name) values ('Marks & Spencers Ltd');
 Enter value for spencers: 
 old   1: insert into customers (customer_name) values ('Marks & Spencers Ltd')
@@ -54,7 +54,7 @@ Marks  Ltd
 ```
 
 禁用替代变量：
-``` sql
+```sql
 SQL> set define off
 SQL> insert into customers (customer_name) values ('Marks & Spencers Ltd');
 
@@ -68,7 +68,7 @@ Marks & Spencers Ltd
 ```
 
 上面的例子你需要customers表，但是有一个表是所有Oracle数据库都拥有的，没错就是dual。如果想了解dual，可以查看本人的文章[select 1 from dual](https://www.cnblogs.com/mingmingcome/p/9310371.html)。
-``` sql
+```sql
 SQL> set define off;
 SQL> select * from dual where dummy='&var';
 

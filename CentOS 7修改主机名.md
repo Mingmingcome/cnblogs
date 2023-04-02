@@ -4,7 +4,7 @@
 
 hosts文件是一个操作系统文件，记录了主机名到IP地址的映射。在以前，计算机还没有那么多的时候，hosts就是现在的DNS，用户只需要定时更新hosts就可以愉快地连接到主机名指定服务器上了。
 
-``` 
+```
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
 ```
@@ -33,7 +33,7 @@ hosts文件是一个操作系统文件，记录了主机名到IP地址的映射�
 
 3、修改/etc/hosts(可选)：
 
-``` 
+```
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4 houming
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6 houming
 ```

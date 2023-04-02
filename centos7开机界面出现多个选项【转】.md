@@ -18,7 +18,7 @@ Linux localhost.localdomain 3.10.0-1127.13.1.el7.x86_64 #1 SMP Tue Jun 23 15:46:
 2.查看系统中全部的内核RPM包:
 
 `# rpm -qa | grep kernel`
-``` linux
+```linux
 kernel-3.10.0-957.el7.x86_64
 kernel-3.10.0-1127.13.1.el7.x86_64
 kernel-tools-3.10.0-1127.13.1.el7.x86_64

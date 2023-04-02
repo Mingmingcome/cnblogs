@@ -7,7 +7,7 @@
 关于String和Date的互转，在java8后会有不同。因为java8添加java.time包及子包，其中主要API是关于日期、时间、时刻和时间段及它们之间的转换和打印输出，比较重要一点的是java.time中LocalDate、LocalTime、LocalDateTime都是线程安全的。有兴趣可以查看官网的描述：[Package java.time](https://docs.oracle.com/javase/8/docs/api/java/time/package-summary.html)和[Package java.time.format](https://docs.oracle.com/javase/8/docs/api/java/time/format/package-summary.html)。
 
 java8前是java.text.SimpleDateFormat类中的两个方法：
-``` java
+```java
 // String -> Date
 public Date parse(String source) throws ParseException;
 // Date -> String
@@ -15,13 +15,13 @@ public final String format(Date date);
 ```
 
 java8中java.time.format.DateTimeFormatter类中：
-``` java
+```java
 // 静态工厂方法构造DateTimeFormatter对象
 public static DateTimeFormatter ofPattern(String pattern);
 ```
 
 java.time中几乎所有的类都有parse、format这两个方法。如类LocalDataTime中：
-``` java
+```java
 // String -> DateTime的天然转化器
 public static LocalDateTime parse(CharSequence text);
 public static LocalDateTime parse(CharSequence text, DateTimeFormatter formatter);
@@ -29,7 +29,7 @@ public static LocalDateTime parse(CharSequence text, DateTimeFormatter formatter
 public String format(DateTimeFormatter formatter);
 ```
 
-``` java
+```java
 // 1.1 String -> Date 
 @Test
 public static void testStringToDate() throws ParseException {
@@ -76,7 +76,7 @@ public static void testDateToString() {
 
 #### String和Timestamp的互转
 
-``` java
+```java
 // 2.1 String -> Timestamp
 @Test	
 public static void testStringToTimestamp() throws ParseException {
@@ -127,7 +127,7 @@ public static void testTimestampToString() {
 
 #### String和Timestamp的互转
 
-``` java
+```java
 // 3.1 Date -> Timestamp
 @Test
 public static void testDateToTimestamp() {

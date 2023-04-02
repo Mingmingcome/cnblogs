@@ -48,7 +48,7 @@
 
 CPU类：
 
-``` java
+```java
 public class CPU {
     public void freeze() {
         System.out.println("CPU执行freeze操作");
@@ -64,7 +64,7 @@ public class CPU {
 
 硬盘类：
 
-``` java
+```java
 public class HardDrive {
     public void read() {
         System.out.println("读取硬盘");
@@ -74,7 +74,7 @@ public class HardDrive {
 
 内存类：
 
-``` java
+```java
 public class Memory {
     public void load() {
         System.out.println("将硬盘中读取到信息加载到运行内存");
@@ -84,7 +84,7 @@ public class Memory {
 
 外观类：
 
-``` java
+```java
 public class ComputerFacade {
     private CPU processor;
     private Memory ram;
@@ -111,7 +111,7 @@ start方法就是相当于开机键。
 
 测试类：
 
-``` java
+```java
 public class User {
     public static void main(String[] args) {
         ComputerFacade computerFacade = new ComputerFacade();

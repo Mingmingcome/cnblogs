@@ -47,7 +47,7 @@ AbstractTemplate是抽象类，定义并实现了一个模板方法templateMetho
 ![模板方法代码示例类图](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_200913083534template-method-pattern-class-diagram.jpg)
 
 <b>抽象模板(Layup.java)</b>：
-``` java
+```java
 // 上篮
 public abstract class Layup {
 
@@ -84,7 +84,7 @@ public abstract class Layup {
 方法layupTemplate()是模板方法，其中有公共方法(catchTheBall、score)，有抽象方法(dribble、stride、throwOrLayTheBall)需要推迟到子类实现。
 
 <b>具体模板(KobeLayup.java、RookieLayup.java)：</b>
-``` java
+```java
 // 科比上篮
 public class KobeLayup extends Layup {
 
@@ -156,7 +156,7 @@ public class RookieLayup extends Layup {
 具体模板实现了抽象模板中抽象方法，不同的具体模板有不同的行为。
 
 <b>测试类：</b>
-``` java
+```java
 public class TemplateMethodTest {
     public static void main(String[] args) {
         Layup layup;

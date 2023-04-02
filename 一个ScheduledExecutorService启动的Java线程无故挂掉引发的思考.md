@@ -22,7 +22,7 @@
 
 代码就一行：
 
-``` java
+```java
 String timeStamp = DateUtil.str2Date(receiveTime, DateUtil.YYYYMMDDHH24MISS).getTime() + "000";
 ```
 
@@ -30,7 +30,7 @@ String timeStamp = DateUtil.str2Date(receiveTime, DateUtil.YYYYMMDDHH24MISS).get
 
 DateUtil.str2Date方法：（String时间转化为Date类型，关于时间转换可以看看本人的[String、Date和Timestamp的互转](https://www.cnblogs.com/mingmingcome/p/9514601.html)）
 
-``` java
+```java
 public static Date str2Date(String dateStr, String dateFormat){
 	if (StringHelper.isEmpty(dateStr)) {
 		return null;
@@ -53,7 +53,7 @@ public static Date str2Date(String dateStr, String dateFormat){
 
 上面说到的在线程中抛出了`NullPointerException`异常，解决方法是增加一个判断是否为空的条件就可以了。但是一般来说，有异常的时候，程序没有捕获异常，日志里或者debug时控制台会打印异常信息，类似这种：
 
-``` java
+```java
 at com.netease.backend.rds.task.CleanHandleThread.run(CleanHandleThread.java:65)
 at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:439)
 at java.util.concurrent.FutureTask$Sync.innerRunAndReset(FutureTask.java:317)
@@ -85,7 +85,7 @@ at java.lang.Thread.run(Thread.java:662)
 #### 解决方法
 
 写了一个测试类，有兴趣可以研究一下这个bug。
-``` java
+```java
 public class ScheduledExecutorServiceThrowExceptionTest {
 	
 	private static int i = 0;
@@ -121,7 +121,7 @@ public class ScheduledExecutorServiceThrowExceptionTest {
 解决方法：
 
 - 1、直接加一个`try-catch`进行异常捕获，然后你可以打印你需要的异常信息或者处理异常。
-``` java
+```java
 public class ScheduledExecutorServiceThrowExceptionTest1 {
 	
 	private static int i = 0;
@@ -153,14 +153,14 @@ public class ScheduledExecutorServiceThrowExceptionTest1 {
 }
 ```
 结果是打印了异常信息，且线程没有被中断。
-``` java
+```java
 1 2 3 4 5 
 在ScheduledExecutorService中有异常抛出，异常堆栈：[Ljava.lang.StackTraceElement;@1bb53ed8
 7 8 9 10 11 12 13 
 ```
 
 - 2、通过ScheduledFuture对象返回异常信息
-``` java
+```java
 public class ScheduledExecutorServiceThrowExceptionTest2 {
 
 	private static int i = 0;
@@ -194,7 +194,7 @@ public class ScheduledExecutorServiceThrowExceptionTest2 {
 }
 ```
 这个解决方法打印了异常信息，但是并没有阻止线程挂掉。
-``` java
+```java
 1 2 3 4 5 
 在ScheduledExecutorService中有异常抛出，异常堆栈：[Ljava.lang.StackTraceElement;@33909752
 ```

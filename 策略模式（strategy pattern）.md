@@ -37,7 +37,7 @@
 ![策略模式类图](https://images.cnblogs.com/cnblogs_com/mingmingcome/1618392/o_200906122116strategy-pattern-class-diagram.jpg) 
 
 抽象策略角色（TaoLu.java）:
-``` java
+```java
 // 套路
 public interface TaoLu {
     void taoLu();
@@ -45,7 +45,7 @@ public interface TaoLu {
 ```
 
 具体策略角色（RichTaoLu.java、TalentedTaoLu.java）：
-``` java
+```java
 // 有钱人套路
 public class RichTaoLu implements TaoLu {
     @Override
@@ -68,7 +68,7 @@ public class TalentedTaoLu implements TaoLu {
 ```
 
 上下文角色（KuiHuaBaoDian.java）：
-``` java
+```java
 // 葵花宝典
 public class KuiHuaBaoDian {
     // 持有套路（Strategy）的引用
@@ -86,7 +86,7 @@ public class KuiHuaBaoDian {
 ```
 
 测试类（ZhaNan.java）：
-``` java
+```java
 // 渣男
 public class ZhaNan {
     public static void main(String[] args) {

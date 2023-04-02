@@ -15,7 +15,7 @@
 https://blog.csdn.net/fuck487/article/details/107562890
 
 伪集群：
-``` bash
+```bash
 # 启动
 bin/kafka-server-start.sh config/server.properties &
 bin/kafka-server-start.sh config/server-1.properties &

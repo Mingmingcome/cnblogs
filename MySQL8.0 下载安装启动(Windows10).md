@@ -16,7 +16,7 @@
 
 my.ini是MySQL安装的配置文件
 
-``` ini
+```ini
 [mysql]
 # 设置mysql客户端默认字符集
 default-character-set=utf8
@@ -71,7 +71,7 @@ F:\mysql-8.0.16-winx64\bin>mysqld --console
 
 使用`mysql -uroot -p`登录，输入上面的那个密码`8WEM&pMQk#xR`即可
 
-``` 
+```
 F:\mysql-8.0.16-winx64\bin>mysql -uroot -p
 Enter password: ************
 Welcome to the MySQL monitor.  Commands end with ; or \g.

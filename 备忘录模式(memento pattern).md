@@ -55,7 +55,7 @@
 有天我捡到一个相框，只要我把小时候的照片放到相框里，我就可以回到小时候。
 
 发起人(Originator)和备忘录(Memento)：
-``` java
+```java
 // 我
 public class I {
     private int age;
@@ -108,7 +108,7 @@ public class I {
 作为备忘录角色的照片（photo）是我（I）的内部类，对我（I）来说是拥有宽接口包含getAge、getDoingSomething等方法，当然你也可以加其他方法，而这些方法对于其他对象是不可见的。
 
 管理者(Caretaker)：
-``` java
+```java
 // 时光倒流相框
 public class Frame {
     private List<I.Photo> photoList = new ArrayList<>();
@@ -125,7 +125,7 @@ public class Frame {
 ```
 
 测试类：
-``` java
+```java
 public class MementoPatternTest {
     public static void main(String[] args) {
         I i = new I();

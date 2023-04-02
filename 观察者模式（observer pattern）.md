@@ -59,7 +59,7 @@
 
 抽象主题：
 
-``` java
+```java
 public interface Observable {
     public void attach(Observer observer);
     public void detach(Observer observer);
@@ -70,7 +70,7 @@ public interface Observable {
 
 前台妹妹（具体主题即被观察者）：
 
-``` java
+```java
 public class Receptionist implements Observable {
     private String state = "老板出去了";
 
@@ -104,7 +104,7 @@ public class Receptionist implements Observable {
 
 看NBA员工观察者：
 
-``` java
+```java
 public class NBAObserver implements  Observer{
     @Override
     public void update() {
@@ -115,7 +115,7 @@ public class NBAObserver implements  Observer{
 
 炒股员工观察者：
 
-``` java
+```java
 public class StockObserver implements Observer {
     @Override
     public void update() {
@@ -126,7 +126,7 @@ public class StockObserver implements Observer {
 
 观察者模式测试类：
 
-``` java
+```java
 public class ObserverTest {
     public static void main(String[] args) {
         Receptionist mm = new Receptionist();

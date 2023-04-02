@@ -18,7 +18,7 @@
 
 图中的String类实例数就达到了20多万，所以String使用了享元模式。再看看大小，char[]和String对比，差了一个数量级。按道理来说，char[]和String的大小应该是差不多的啊，为什么呢？我们再看看源码：
 
-``` java
+```java
 public final class String
     implements java.io.Serializable, Comparable<String>, CharSequence {
     /** The value is used for character storage. */
@@ -29,7 +29,7 @@ public final class String
 ```
 String中的char[]就是用来存储字符串的，然后String只是保存着char[]的引用（即这个数组的内存地址）。所以char[]和String数量差不多，但是大小却差了一个数量级的原因是char[]存储着真正的字符串内容，String只是存储着char[]引用。而且这个char[]放在常量池中，通过享元模式被String引用，这样子一个char[]就可能被多个String共享引用。多说无益，show me code。
 
-``` java
+```java
 public class StringDemo {
 
     public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {
@@ -126,7 +126,7 @@ LOVEmingcome
 
 玩家接口：
 
-``` java
+```java
 public interface Player {
     void assignWeapon(String weapon);
     String getTask();
@@ -135,7 +135,7 @@ public interface Player {
 
 恐怖分子：
 
-``` java
+```java
 public class Terrorist implements Player{
     private final String task;
 
@@ -167,7 +167,7 @@ public class Terrorist implements Player{
 
 反恐精英：
 
-``` java
+```java
 public class CounterTerrorist implements Player{
     private final String task;
 
@@ -199,7 +199,7 @@ public class CounterTerrorist implements Player{
 
 玩家工厂：
 
-``` java
+```java
 public class PlayerFactory {
 
     public static Player getPlayer(String playerType) {
@@ -223,7 +223,7 @@ public class PlayerFactory {
 
 CS客户端：
 
-``` java
+```java
 public class CounterStrike {
     private static String[] playerType = {"Terrorist", "CounterTerrorist"};
 

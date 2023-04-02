@@ -41,7 +41,7 @@
 组合关系就是一个人有手脚，聚合是一个人有钱。
 
 示例代码：
-``` java
+```java
 public class Person {
 	private Hand hand = new Hand();
 	private Foot foot = new Foot();
@@ -83,7 +83,7 @@ public class Money{}
 这里对于订单来说有两个维度，一个是种类：蛋糕或糖果，一种是制作方式：手工或机器制作。如果没有使用桥接模式的话，就有四种组合方式，就是四个类，但是如果增加了种类或者制作方式的话，需要继续计算组合方式，类增长的速度不是我们想要的。当使用了桥接模式之后，添加种类或制作方式只需要添加继承抽象化对象或者实现化对象增加需要变化的维度的对象即可。
 
 抽象化角色（OrderAbstraction.java）：
-``` java
+```java
 // 订单
 public abstract class OrderAbstraction {
 	protected FactoryImplementor factoryImplementor;
@@ -97,7 +97,7 @@ public abstract class OrderAbstraction {
 ```
 
 扩充抽象化角色（CakeOrderRefinedAbstraction.java）：
-``` java
+```java
 // 蛋糕订单
 public class CakeOrderRefinedAbstraction extends OrderAbstraction {
 	private int count;
@@ -133,7 +133,7 @@ public class CandyOrderRefinedAbstraction extends OrderAbstraction {
 ```
 
 实现化角色（FactoryImplementor.java）：
-``` java
+```java
 // 工厂
 public interface FactoryImplementor {
 	public void provide(int count, String orderName);
@@ -141,7 +141,7 @@ public interface FactoryImplementor {
 ```
 
 具体实现化角色（HandworkFactoryConcreteImplementor.java、MachineFactoryConcreteImplementor.java）：
-``` java
+```java
 // 手工作坊
 public class HandworkFactoryConcreteImplementor implements FactoryImplementor {
 
@@ -163,7 +163,7 @@ public class MachineFactoryConcreteImplementor implements FactoryImplementor {
 ```
 
 测试类（BridgePatternTest.java）：
-``` java
+```java
 public class BridgePatternTest {
 
 	public static void main(String[] args) {

@@ -71,7 +71,7 @@ README：
 
 一开始，追踪所有的方法，因控制台打印过快导致无法定位，所以需要缩小范围。通过学习swing事件监听相关知识`http://c.biancheng.net/view/1235.html`，了解点击会被动作事件监听器ActionListener.actionPerformed捕捉到，执行对应的动作。于是其中一个样例代码修改为：
 
-``` java
+```java
 @BTrace
 public class AllMethods1 {
     @OnMethod(
@@ -121,7 +121,7 @@ public class AllMethods1 {
 3、让JVM加载代理jar，并执行代理类的内容
 
 第一步，创建maven工程，创建代理类，AgentMain代码（Agent class）如下：
-``` java
+```java
 package org.example.agent;
 
 import jdk.internal.org.objectweb.asm.ClassReader;
@@ -225,7 +225,7 @@ public class AgentMain {
 ```
 
 第二，配置元数据信息MAINFEST.MF，pom文件中配置如下：
-``` xml
+```xml
 <build>
         <finalName>my-attach-agent</finalName>
         <plugins>
@@ -277,7 +277,7 @@ public class AgentMain {
 
 2、动态加载。
 
-``` java
+```java
 public class Main {
 
     public static void main(String[] args) throws IOException, AttachNotSupportedException, AgentLoadException, AgentInitializationException, AgentLoadException, AgentInitializationException {
@@ -313,7 +313,7 @@ public class Main {
 
 我只需要将前面代码的AgentMain类中MyClassFileTransformer修改一下即可：
 
-``` java
+```java
  public static class MyClassFileTransformer implements ClassFileTransformer {
         @Override
         public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined,
@@ -348,7 +348,7 @@ maven打包的时候注意：<b>需要MANIFEST.MF添加Boot-Class-Path。</b>
 
 pom文件修改：
 
-``` xml
+```xml
 <manifestEntries>
     <Premain-Class>org.example.agent.AgentMain002</Premain-Class>
     <Agent-Class>org.example.agent.AgentMain002</Agent-Class>

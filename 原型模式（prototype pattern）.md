@@ -44,7 +44,7 @@ java应用原型模式方法：实现Cloneable接口。
 
 抽象原型角色：
 
-``` java
+```java
 public interface PrototypeCapable extends Cloneable {
     PrototypeCapable clone() throws CloneNotSupportedException;
 }
@@ -53,7 +53,7 @@ public interface PrototypeCapable extends Cloneable {
 
 具体原型角色：
 
-``` java
+```java
 public class Movie implements PrototypeCapable {
 
     private String name = "钢铁侠";
@@ -105,7 +105,7 @@ public class Show implements PrototypeCapable {
 
 客户端角色：
 
-``` java
+```java
 public class PrototypePatternTest{
     public static void main(String[] args) throws CloneNotSupportedException {
         Movie moviePrototype = new Movie();
