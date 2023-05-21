@@ -138,7 +138,7 @@ for T from 0 to 60 step 1 draw (t,sqrt(t));
 
 #### 代码示例
 
-本代码示例代码相对于本文来说过于冗长，下面带有有所省略，有兴趣请参考我的github：[]()。
+本代码示例代码相对于本文来说过于冗长，下面带有有所省略，有兴趣请参考我的github：[interpreter](https://github.com/Mingmingcome/cnblogs/tree/master/com/mingmingcome/designpattern/behavioral/interpreter)。
 
 代码示例主要流程：
 
